@@ -1,0 +1,3 @@
+export const TRANSLATIONS_EN = {
+  'KEY': 'VALUE_TRANSLATED_EN'
+};
