@@ -6,7 +6,7 @@ const Register = () => {
   return (
     <Container>
       <Navbar />
-      Register Page test
+      Register Page test 22222
     </Container>
   );
 };
