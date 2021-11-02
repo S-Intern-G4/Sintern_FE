@@ -8,7 +8,7 @@ const Container = styled.div`
   align-items: center;
   text-align: center;
   color: #107d9e;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif; 
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   position: fixed;
 `;
 

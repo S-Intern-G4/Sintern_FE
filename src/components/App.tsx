@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 
 import HomePage from './pages/Home';
 import Register from './pages/Register';
-import Login from './pages/Login';
+import Login from './pages/Login/Login';
 import { UserContextProvider } from './context/UserContext';
 import UnauthenticatedRoute from './shared/routes/UnauthenticatedRoute';
 import AuthenticatedRoute from './shared/routes/AuthenticatedRoute';
