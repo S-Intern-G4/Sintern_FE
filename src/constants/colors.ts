@@ -1,0 +1,5 @@
+export const COLORS = {
+  'PRIMARY_DARK_BlUE': '#00458B',
+  'PRIMARY_LIGHT_BlUE': '#1890ff',
+  'PRIMARY_GREEN': '#3FD2C7',
+};
