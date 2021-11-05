@@ -1,5 +1,6 @@
 import { Form } from 'antd';
 import FormUserType from './FormUserType';
+import FormStudentPersonalDetails from './StrudentForm/FormStudentPersonalDetails';
 
 export default class RegisterForm extends Component<any, any>
 {
@@ -58,7 +59,7 @@ export default class RegisterForm extends Component<any, any>
                 switch (step) {
                     case 2:
                         return (
-                            <h1>Step 2 Student</h1>
+                            <FormStudentPersonalDetails nextStep={this.nextStep}/>
                         );
                     case 3:
                         return (

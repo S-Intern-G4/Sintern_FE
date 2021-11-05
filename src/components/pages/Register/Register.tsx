@@ -7,26 +7,13 @@ import RegisterFormWrapper from './RegisterFormWrapper';
 
 export default class Register extends Component {
 
-    config = {
-        rules: [{ type: 'object' as const, required: true, message: 'Please select time!' }]
-    };
+
 
     onFinish = (values: any) => {
         console.log('Success:', values);
     };
 
-    // const { Option } = Select;
 
-    // prefixSelector = (
-    //   <Form.Item name="prefix" noStyle>
-    //     <Select style={{ width: 70 }}>
-    //       <Option value="86">+86</Option>
-    //       <Option value="87">+87</Option>
-    //     </Select>
-    //   </Form.Item>
-    // );
-
-    // const { RangePicker } = DatePicker;
 
     onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
