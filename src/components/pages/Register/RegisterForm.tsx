@@ -1,18 +1,23 @@
 import { Form } from 'antd';
 import FormUserType from './FormUserType';
 import FormStudentPersonalDetails from './StrudentForm/FormStudentPersonalDetails';
+import FormStudentEducationDetails from './StrudentForm/FormStudentEducationDetails';
 
-export default class RegisterForm extends Component<any, any>
-{
+export default class RegisterForm extends Component<any, any> {
     state = {
         company: false,
         student: false,
-        step: 1 ,
-        name: '' ,
-        name1: ''
-    }
-
-
+        step: 1,
+        firstName: '',
+        lastName: '',
+        dateOfBirth: null,
+        numberPrefix: null,
+        phoneNumber: null,
+        university: null,
+        faculty: null,
+        specialization: null,
+        yearOfStudy: null
+    };
 
     // Proceed to the next step
     nextStep = () => {
@@ -20,7 +25,7 @@ export default class RegisterForm extends Component<any, any>
         this.setState({
             step: step + 1
         });
-    }
+    };
 
     // Go back to prev. step
     prevStep = () => {
@@ -28,26 +33,31 @@ export default class RegisterForm extends Component<any, any>
         this.setState({
             step: step - 1
         });
-    }
+    };
 
     // Handle fields change
     handleChange = input => e => {
-        this.setState({ [input]: e.target.value } );
-    }
+        this.setState({ [input]: e.target.value });
+    };
+
+    // Handle 'select' and 'date' change
+    handleEmptyEventChange = input => e => {
+        this.setState({ [input]: e });
+    };
 
     // Handle the switch between user type
     switchToStudentType = () => {
         this.setState({ student: true, company: false });
-    }
+    };
 
     // Handle the switch between user type
     switchToCompanyType = () => {
         this.setState({ company: true, student: false });
-    }
+    };
 
     render() {
         const { step, student, company } = this.state;
-        if (step == 1){
+        if (step == 1) {
             return (
                 <FormUserType nextStep={this.nextStep}
                               switchToStudentType={this.switchToStudentType}
@@ -57,14 +67,29 @@ export default class RegisterForm extends Component<any, any>
         } else if (step > 1) {
             if (student) {
                 switch (step) {
-                    case 2:
+                    case 2: {
+                        const { firstName, lastName, dateOfBirth, numberPrefix, phoneNumber } = this.state;
+                        const personalDetailsStudent = { firstName, lastName, dateOfBirth, numberPrefix, phoneNumber };
                         return (
-                            <FormStudentPersonalDetails nextStep={this.nextStep}/>
+                            <FormStudentPersonalDetails nextStep = { this.nextStep }
+                                                        prevStep = { this.prevStep }
+                                                        handleChange = { this.handleChange }
+                                                        handleDateChange = { this.handleEmptyEventChange }
+                                                        personalDetailsStudent = { personalDetailsStudent }
+                            />
                         );
-                    case 3:
+                    }
+                    case 3: {
+                        const { university, faculty, specialization, yearOfStudy } = this.state;
+                        const educationDetailsStudent = { university, faculty, specialization, yearOfStudy };
                         return (
-                            <h1>Step 3 Student</h1>
+                            <FormStudentEducationDetails nextStep = {this.nextStep}
+                                                         prevStep = {this.prevStep}
+                                                         handleChange = { this.handleEmptyEventChange }
+                                                         educationDetailsStudent = { educationDetailsStudent }
+                            />
                         );
+                    }
                     case 4:
                         return (
                             <h1>Step 4 Student</h1>
@@ -89,95 +114,3 @@ export default class RegisterForm extends Component<any, any>
         }
     }
 }
-
-
-
-
-// <Container>
-//     <RegisterContent>
-//         <Card title="Register" bordered={
-//             false
-//         }
-//
-//         >
-//             <RegisterForm
-//                 name="basic"
-//                 labelCol={{ span: 8 }}
-//                 wrapperCol={{ span: 16 }}
-//                 initialValues={{ remember: true }}
-//                 onFinish={onFinish}
-//                 onFinishFailed={onFinishFailed}
-//                 autoComplete="off"
-//             >
-//                 <Form.Item
-//                     label="Email"
-//                     name="email"
-//                     rules={[{ required: true, message: 'Please input your username!' }]}
-//                 >
-//                     <Input/>
-//                 </Form.Item>
-//
-//                 <Form.Item
-//                     label="Password"
-//                     name="password"
-//                     rules={[{ required: true, message: 'Please input your password!' }]}
-//                 >
-//                     <Input.Password/>
-//                 </Form.Item>
-//
-//                 <Form.Item
-//                     label="First Name"
-//                     name="first_name"
-//                     rules={[{ required: true, message: 'Please input your first name!' }]}
-//                 >
-//                     <Input/>
-//                 </Form.Item>
-//
-//                 <Form.Item
-//                     label="Last Name"
-//                     name="last_name"
-//                     rules={[{ required: true, message: 'Please input your last name!' }]}
-//                 >
-//                     <Input/>
-//                 </Form.Item>
-//
-//                 <Form.Item name="date-picker" label="DatePicker" {...config}>
-//                     <DatePicker/>
-//                 </Form.Item>
-//
-//                 <Form.Item
-//                     name="phone"
-//                     label="Phone Number"
-//                     rules={[{ required: true, message: 'Please input your phone number!' }]}
-//                 >
-//                     <Input addonBefore={prefixSelector} style={{ width: '100%' }}/>
-//                 </Form.Item>
-//
-//                 <Form.Item name="educationDetails" label="Education Details" rules={[{ required: true }]}>
-//                     <Select
-//                         placeholder="Select a option and change input text above"
-//                         allowClear
-//                     >
-//                         <Option value="male">male</Option>
-//                         <Option value="female">female</Option>
-//                         <Option value="other">other</Option>
-//
-//                     </Select>
-//                 </Form.Item>
-//
-//
-//                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-//                     <Link to={'/login'}>
-//                         <CustomButton type="primary" htmlType="submit">
-//                             Save
-//                         </CustomButton>
-//                     </Link>
-//                 </Form.Item>
-//
-//
-//             </RegisterForm>
-//
-//
-//         </Card>
-//     </RegisterContent>
-// </Container>

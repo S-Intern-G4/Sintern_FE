@@ -40,10 +40,12 @@ const Login = () => {
   const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
 
   const onFinish = (values: any) => {
+    // eslint-disable-next-line no-console
     console.log('Success:', values);
   };
 
   const onFinishFailed = (errorInfo: any) => {
+    // eslint-disable-next-line no-console
     console.log('Failed:', errorInfo);
   };
 
@@ -62,7 +64,7 @@ const Login = () => {
             initialValues={{ remember: true }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
-            autoComplete="off"
+            autoComplete='off'
           >
             <CustomFormItem
               label={'Email'}
@@ -83,7 +85,7 @@ const Login = () => {
             </CustomFormItem>
 
             <CustomFormItem
-              label={'Password'}
+              label='Password'
               name='password'
               rules={[
                 { required: true, message: 'Password is required' }
