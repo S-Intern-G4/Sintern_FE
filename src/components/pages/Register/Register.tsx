@@ -1,23 +1,32 @@
-import { Link } from 'react-router-dom';
+import { message } from 'antd';
 import React, { Component } from 'react';
+import React from 'react';
 import Container from '../../shared/Container';
 import RegisterContent from './RegisterContent';
 import RegisterForm from './RegisterForm';
-import CustomButton from '../../shared/CustomButton';
+import RegisterFormWrapper from './RegisterFormWrapper';
+import { DownOutlined, UserOutlined } from '@ant-design/icons';
 
 export default class Register extends Component {
 
-  const onFinish = (values: any) => {
-        // eslint-disable-next-line no-console
-    console.log('Success:', values);
+    config = {
     };
 
-  const onFinishFailed = (errorInfo: any) => {
-        // eslint-disable-next-line no-console
-    console.log('Failed:', errorInfo);
+    onFinish = (values: any) => {
     };
 
-  const { Option } = Select;
+    // const { Option } = Select;
+  const prefixSelector = (
+      <Select style={{ width: 70 }}>
+      </Select>
+    </Form.Item>
+  );
+  const { RangePicker } = DatePicker;
+  const config = {
+    rules: [{ type: 'object' as const, required: true, message: 'Please select time!' }],
+  };
+  
+  function handleMenuClick(e) {
         message.info('Click on menu item.');
         // eslint-disable-next-line no-console
         console.log('click', e);
@@ -25,12 +34,21 @@ export default class Register extends Component {
 
     render() {
     render() {
+        1st menu item
+      </Menu.Item>
+        2nd menu item
+      </Menu.Item>
+        3rd menu item
+      </Menu.Item>
+    </Menu>
+  );
+    render() {
         return (
             <div>
                 <Container>
                     <RegisterContent>
-                        <Form>
-                            <RegisterForm/>
+        <Card title='Register' bordered={false}>
+          <RegisterForm
                         </Form>
                     </RegisterContent>
                 </Container>

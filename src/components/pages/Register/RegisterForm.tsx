@@ -1,171 +1,64 @@
 import React, { Component } from 'react';
-import FormUserType from './FormUserType';
-import FormStudentEducationDetails from './StrudentForm/FormStudentEducationDetails';
+import CustomForm from '../../shared/CustomForm';
 import FormCompanyConfirmDetails from './CompanyForm/FormCompanyConfirmDetails';
 
 export default class RegisterForm extends Component<any, any>
 {
-    border-radius: 10px;
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-export default class RegisterForm extends Component<any, any> {
     state = {
-        step: 1,
-        passwordStudent: '',
-        dateOfBirth: null,
-        numberPrefix: null,
-        phoneNumber: null,
+        company: false,
+        student: false,
+        step: 1 ,
+        name: '' ,
+        name1: ''
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    opacity: 1;
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    z-index: ;
+  }
         university: null,
-        faculty: null,
-        specialization: null,
-        yearOfStudy: null,
-        companyAddress: ''
-    };
-
-    // Proceed to the next step
-    nextStep = () => {
-        const { step } = this.state;
+  .ant-form-item-control, 
+  .ant-form-item-label {
+    z-index: 2;
         this.setState({
             step: step + 1
         });
-    };
+  }
 
-            step: step - 1
+  .ant-form-item-required {
+    color: #fff;
+        const { step } = this.state;
+        this.setState({
         });
-    };
+  }
 
-`;
-        this.setState({ [input]: e.target.value } );
     }
 
+    // Handle the switch between user type
     // Handle 'select' and 'date' change
     handleEmptyEventChange = input => e => {
         this.setState({ [input]: e });
     };
     }
 
-export default RegisterForm;
-    }
-
-                            <RegisterConfirmation userDetailsPack={ userDetailsPack }
-        if (step == 1){
-                            />
-                        );
-                    case 2:
-                        const { firstName, lastName, dateOfBirth, numberPrefix, phoneNumber } = this.state;
-                        const personalDetailsStudent = { firstName, lastName, dateOfBirth, numberPrefix, phoneNumber };
-                            <FormStudentPersonalDetails nextStep={this.nextStep}/>
-                                                        prevStep = { this.prevStep }
-                                                        handleChange = { this.handleChange }
-                                                        handleDateChange = { this.handleEmptyEventChange }
-                                                        personalDetailsStudent = { personalDetailsStudent }
-                            />
-                    case 3:
-                    case 3: {
-                        const { university, faculty, specialization, yearOfStudy } = this.state;
-                        const educationDetailsStudent = { university, faculty, specialization, yearOfStudy };
-                            <h1>Step 3 Student</h1>
-                                                         prevStep = {this.prevStep}
-                                                         handleChange = { this.handleEmptyEventChange }
-                                                         educationDetailsStudent = { educationDetailsStudent }
-                            />
-                    }
-                    case 4:
-                        const { emailStudent, passwordStudent } = this.state;
-                        const studentCredentials = { emailStudent, passwordStudent };
-                            <h1>Step 4 Student</h1>
-                                                    prevStep={this.prevStep}
-                                                    handleChange = { this.handleChange }
-                                                    studentCredentials={ studentCredentials }
-                            />
-                        );
-                    }
-                    case 5: {
-                        const {
-                            emailStudent, passwordStudent, firstName, lastName, dateOfBirth, numberPrefix, phoneNumber, university,
-                            faculty, specialization, yearOfStudy
-                        } = this.state;
-                        const studentDetails = {
-                            emailStudent, passwordStudent, firstName, lastName, dateOfBirth, numberPrefix, phoneNumber, university,
-                            faculty, specialization, yearOfStudy
-                        };
-                        return (
-                            <FormStudentConfirmDetails nextStep={this.nextStep}
-                                                       prevStep={this.prevStep}
-                                                       studentDetails={studentDetails}
-                            />
-                        );
-                    }
-                    case 6: {
-                        const {
-                            student, company, emailStudent, passwordStudent, firstName, lastName, dateOfBirth, numberPrefix, phoneNumber, university,
-                            faculty, specialization, yearOfStudy
-                        } = this.state;
-                        const userDetailsPack = {
-                            student, company, emailStudent, passwordStudent, firstName, lastName, dateOfBirth, numberPrefix, phoneNumber, university,
-                            faculty, specialization, yearOfStudy
-                        };
-                        return (
-                            <RegisterConfirmation userDetailsPack={ userDetailsPack }
-                            />
-                    }
-                }
-                    case 2:
-                        const { companyName, companyDomain, companyAddress } = this.state;
-                        const companyDetails = { companyName, companyDomain, companyAddress };
-                            <h1>Step 2 Company</h1>
-                                                prevStep = { this.prevStep }
-                                                handleChange = { this.handleChange }
-                                                handleDomainChange = { this.handleEmptyEventChange }
-                                                companyDetails = { companyDetails }
-                            />
-                    case 3:
-                    case 3:{
-                        const { emailCompany, passwordCompany } = this.state;
-                        const companyCredentials =  { emailCompany, passwordCompany } ;
-                            <h1>Step 3 Company</h1>
-                                                    prevStep = { this.prevStep }
-                                                    handleChange = { this.handleChange }
-                                                    companyCredentials = { companyCredentials }
-                            />
-                    }
-                    case 4:{
-                        const {
-                            emailCompany, passwordCompany, companyName,
-                            companyDomain, companyAddress } = this.state;
-                        const companyDetails = {
-                            emailCompany, passwordCompany, companyName,
-                            companyDomain, companyAddress
-                        };
-                        return (
-                            <FormCompanyConfirmDetails nextStep={this.nextStep}
-                                                       prevStep={this.prevStep}
-                                                       companyDetails={companyDetails}
-                            />
-                        );
-                    }
-                    case 5:{
-                        const {
-                            student, company, emailCompany, passwordCompany, companyName,
-                            companyDomain, companyAddress } = this.state;
-                        const userDetailsPack = {
-                            student, company, emailCompany, passwordCompany, companyName,
-                            companyDomain, companyAddress
-                        };
-                        return (
-                            <RegisterConfirmation userDetailsPack={ userDetailsPack }
-                            />
-                        );
-                    }
-                }
-            } else {
-                return (
-                    <h1>Error</h1>
-                );
-            }
-        }
-    }
-}
+    // Handle the switch between user type
+//                     </Select>
+//                 </Form.Item>
+//
+//
+//                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+//                     <Link to={'/login'}>
+//                         <CustomButton type="primary" htmlType="submit">
+//                             Save
+//                         </CustomButton>
+//                     </Link>
+//                 </Form.Item>
+//
+//
+//             </RegisterForm>
+//
+//
+//         </Card>
+//     </RegisterContent>
+// </Container>
