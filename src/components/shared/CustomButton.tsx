@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Button } from 'antd';
 
 const CustomButton = styled(Button)`
-  background-color: #df7153;
+  background-color: #00458B;
   color: #fff;
   font-size: 1.1rem;
   border: unset;
@@ -16,7 +16,7 @@ const CustomButton = styled(Button)`
   &.ant-btn:hover:enabled,
   &.ant-btn:active:enabled,
   &.ant-btn:focus:enabled {
-    background-color: #e38368;
+    background-color: #1890ff;
     color: #fff;
   }
 `;
