@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import FormStudentEducationDetails from './StrudentForm/FormStudentEducationDetails';
-import FormStudentConfirmDetails from './StrudentForm/FormStudentConfirmDetails';
 import RegisterConfirmation from './CommonForm/RegisterConfirmation';
 import FormCompanyDetails from './CompanyForm/FormCompanyDetails';
 import FormCompanyCredentials from './CompanyForm/FormCompanyCredentials';
 import FormStudentCredentials from './StrudentForm/FormStudentCredentials';
 import FormCompanyConfirmDetails from './CompanyForm/FormCompanyConfirmDetails';
 
-const RegisterForm = styled(CustomForm)`
-  &:after {
+export default class RegisterForm extends Component<any, any>
+{
     border-radius: 10px;
     content: '';
     position: absolute;
@@ -19,13 +18,10 @@ const RegisterForm = styled(CustomForm)`
 export default class RegisterForm extends Component<any, any> {
     state = {
         step: 1,
-
-        // student attributes
-        student: false,
-        emailStudent: '',
-        passwordStudent: '',
-        firstName: '',
-        lastName: '',
+        name: '' ,
+        name1: ''
+    }
+        numberPrefix: null,
         dateOfBirth: null,
         numberPrefix: null,
         phoneNumber: null,
@@ -33,7 +29,6 @@ export default class RegisterForm extends Component<any, any> {
         faculty: null,
         specialization: null,
         yearOfStudy: null,
-
         // company attributes
         company: false,
         emailCompany: '',
@@ -56,12 +51,41 @@ export default class RegisterForm extends Component<any, any> {
     };
 
 `;
+        this.setState({ [input]: e.target.value } );
+    }
+
+    // Handle 'select' and 'date' change
+    handleEmptyEventChange = input => e => {
+        this.setState({ [input]: e });
+    };
+    }
 
 export default RegisterForm;
+    }
 
                             <RegisterConfirmation userDetailsPack={ userDetailsPack }
+        if (step == 1){
                             />
                         );
+                    case 2:
+                        const { firstName, lastName, dateOfBirth, numberPrefix, phoneNumber } = this.state;
+                        const personalDetailsStudent = { firstName, lastName, dateOfBirth, numberPrefix, phoneNumber };
+                            <FormStudentPersonalDetails nextStep={this.nextStep}/>
+                                                        prevStep = { this.prevStep }
+                                                        handleChange = { this.handleChange }
+                                                        handleDateChange = { this.handleEmptyEventChange }
+                                                        personalDetailsStudent = { personalDetailsStudent }
+                            />
+                    case 3:
+                    case 3: {
+                        const { university, faculty, specialization, yearOfStudy } = this.state;
+                        const educationDetailsStudent = { university, faculty, specialization, yearOfStudy };
+                            <h1>Step 3 Student</h1>
+                                                         prevStep = {this.prevStep}
+                                                         handleChange = { this.handleEmptyEventChange }
+                                                         educationDetailsStudent = { educationDetailsStudent }
+                            />
+                    }
                     }
                 }
             } else {

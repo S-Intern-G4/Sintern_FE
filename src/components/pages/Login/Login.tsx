@@ -67,8 +67,8 @@ const Login = () => {
             autoComplete='off'
           >
             <CustomFormItem
-              label={'Email'}
-              name='identifier'
+              label='Email'
+              name='email'
               rules={[
                 { required: true, message: 'Email is required' }
               ]}

@@ -1,10 +1,27 @@
 import React, { Component } from 'react';
+import { Card, DatePicker, Form, Input, Select } from 'antd';
 import RegisterFormWrapper from '../RegisterFormWrapper';
-                        >
                             <Option value='babes-bolyai'>`Babes Bolyai` University</Option>
                             <Option value='technical-cluj-napoca'>Technical University of Cluj-Napoca</Option>
                             <Option value='medicine-cluj-napoca'>`Iuliu Hatieganu` University of Md. and Ph.
-                                Cluj-Napoca</Option>
+export default class FormStudentPersonalDetails extends Component<any, any> {
+    };
+
+    prev = e => {
+        e.preventDefault();
+        this.props.prevStep();
+    };
+        const { educationDetailsStudent } = this.props;
+            <Card title="Unde studiati ?" bordered={false}>
+                    <Form.Item name="educationDetails" label="Education Details" rules={[{ required: true }]}>
+                        <Select
+                            placeholder="Select a option and change input text above"
+                            allowClear
+                        >
+                            <Option value="male">male</Option>
+                            <Option value="female">female</Option>
+                            <Option value="other">other</Option>
+
                             <Option value='other'>other</Option>
                         </Select>
                     </Form.Item>
