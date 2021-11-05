@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import CustomForm from '../../shared/CustomForm';
 import FormStudentEducationDetails from './StrudentForm/FormStudentEducationDetails';
 import FormStudentConfirmDetails from './StrudentForm/FormStudentConfirmDetails';
 import RegisterConfirmation from './CommonForm/RegisterConfirmation';

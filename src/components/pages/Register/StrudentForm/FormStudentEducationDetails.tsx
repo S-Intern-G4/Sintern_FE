@@ -1,32 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Form, Select } from 'antd';
 import RegisterFormWrapper from '../RegisterFormWrapper';
-import CustomButton from '../../../shared/CustomButton';
-
-const { Option } = Select;
-
-export default class FormStudentEducationDetails extends Component<any, any> {
-
-    next = e => {
-        e.preventDefault();
-        this.props.nextStep();
-    };
-
-    prev = e => {
-        e.preventDefault();
-        this.props.prevStep();
-    };
-
-    render() {
-        const { educationDetailsStudent } = this.props;
-        return (
-            <Card title='Where do you study ?' bordered={false}>
-                <RegisterFormWrapper>
-                    <Form.Item name='university' label='University' rules={[{ required: true }]}>
-                        <Select
-                            placeholder='Select a university'
-                            onChange={this.props.handleChange('university')}
-                            defaultValue={educationDetailsStudent.university}
                         >
                             <Option value='babes-bolyai'>`Babes Bolyai` University</Option>
                             <Option value='technical-cluj-napoca'>Technical University of Cluj-Napoca</Option>
