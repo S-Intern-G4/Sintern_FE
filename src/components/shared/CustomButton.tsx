@@ -16,7 +16,7 @@ const CustomButton = styled(Button)`
   &.ant-btn:hover:enabled,
   &.ant-btn:active:enabled,
   &.ant-btn:focus:enabled {
-    background-color: #1890ff;
+    background-color: #0059b3;
     color: #fff;
   }
 `;
