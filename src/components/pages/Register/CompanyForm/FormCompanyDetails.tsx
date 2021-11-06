@@ -1,37 +1,5 @@
 import React, { Component } from 'react';
-import { Card, DatePicker, Form, Input, Select } from 'antd';
 import CustomButton from '../../../shared/CustomButton';
-import RegisterFormWrapper from '../RegisterFormWrapper';
-
-const { Option } = Select;
-
-export default class FormCompanyDetails extends Component<any, any> {
-
-    next = e => {
-        e.preventDefault();
-        this.props.nextStep();
-    };
-
-    prev = e => {
-        e.preventDefault();
-        this.props.prevStep();
-    };
-
-    render() {
-        const { companyDetails } = this.props;
-        return (
-            <Card title='Please enter your data :' bordered={false}>
-                <RegisterFormWrapper>
-                    <Form.Item
-                        label='Company name'
-                        name='company_name'
-                        rules={[{ required: true, message: 'Please input your name!' }]}
-                    >
-                        <Input placeholder='Enter your name...'
-                               onChange={this.props.handleChange('companyName')}
-                               defaultValue={companyDetails.companyName}
-                               maxLength={20}
-                        />
                     </Form.Item>
 
                     <Form.Item name='company-domain' label='Domain' rules={[{ required: true }]}>
