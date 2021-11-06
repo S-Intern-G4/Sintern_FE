@@ -30,6 +30,9 @@ const Navbar = () => {
       <Link to={'/register'}>
         Register
       </Link>
+      <Link to={'/cards'}>
+        Cards
+      </Link>
     </CustomNavbar>
   );
 };
