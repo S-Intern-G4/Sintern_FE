@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
-import { DatePicker, Form, Input, Select } from 'antd';
+import React,{ Component } from 'react';
 import CustomButton from '../../../shared/CustomButton';
 
-const { Option } = Select;
-
-export default class FormCompanyDetails extends Component<any, any> {
+export default class FormCompanyCredentials extends Component<any, any>{
 
     next = e => {
         e.preventDefault();
@@ -19,7 +16,7 @@ export default class FormCompanyDetails extends Component<any, any> {
     render() {
         return (
             <div>
-                <h1>Detalii companie</h1>
+                <h1>Credentiale companie</h1>
                 <div style={{ display: 'inline-flex' }}>
                     <CustomButton onClick={this.prev}>
                         Back

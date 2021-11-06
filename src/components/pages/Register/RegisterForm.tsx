@@ -1,13 +1,22 @@
 import { Form } from 'antd';
-import FormUserType from './FormUserType';
+import FormUserType from './CommonForm/FormUserType';
 import FormStudentPersonalDetails from './StrudentForm/FormStudentPersonalDetails';
 import FormStudentEducationDetails from './StrudentForm/FormStudentEducationDetails';
+import FormStudentConfirmDetails from './StrudentForm/FormStudentConfirmDetails';
+import RegisterConfirmation from './CommonForm/RegisterConfirmation';
+import FormCompanyDetails from './CompanyForm/FormCompanyDetails';
+import FormCompanyCredentials from './CompanyForm/FormCompanyCredentials';
+import FormStudentCredentials from './StrudentForm/FormStudentCredentials';
+import FormCompanyConfirmDetails from './CompanyForm/FormCompanyConfirmDetails';
 
 export default class RegisterForm extends Component<any, any> {
     state = {
-        company: false,
-        student: false,
         step: 1,
+
+        // student attributes
+        student: false,
+        emailStudent: '',
+        passwordStudent: '',
         firstName: '',
         lastName: '',
         dateOfBirth: null,
@@ -16,7 +25,15 @@ export default class RegisterForm extends Component<any, any> {
         university: null,
         faculty: null,
         specialization: null,
-        yearOfStudy: null
+        yearOfStudy: null,
+
+        // company attributes
+        company: false,
+        emailCompany: '',
+        passwordCompany: '',
+        companyName: '',
+        companyDomain: null,
+        companyAddress: ''
     };
 
     // Proceed to the next step
@@ -90,21 +107,100 @@ export default class RegisterForm extends Component<any, any> {
                             />
                         );
                     }
-                    case 4:
+                    case 4: {
+                        const { emailStudent, passwordStudent } = this.state;
+                        const studentCredentials = { emailStudent, passwordStudent };
                         return (
-                            <h1>Step 4 Student</h1>
+                            <FormStudentCredentials nextStep={this.nextStep}
+                                                    prevStep={this.prevStep}
+                                                    studentCredentials={studentCredentials}
+                            />
                         );
+                    }
+                    case 5: {
+                        const {
+                            emailStudent, passwordStudent, firstName, lastName, dateOfBirth, numberPrefix, phoneNumber, university,
+                            faculty, specialization, yearOfStudy
+                        } = this.state;
+                        const studentDetails = {
+                            emailStudent, passwordStudent, firstName, lastName, dateOfBirth, numberPrefix, phoneNumber, university,
+                            faculty, specialization, yearOfStudy
+                        };
+                        return (
+                            <FormStudentConfirmDetails nextStep={this.nextStep}
+                                                       prevStep={this.prevStep}
+                                                       studentDetails={studentDetails}
+                            />
+                        );
+                    }
+                    case 6: {
+                        const {
+                            student, company, emailStudent, passwordStudent, firstName, lastName, dateOfBirth, numberPrefix, phoneNumber, university,
+                            faculty, specialization, yearOfStudy
+                        } = this.state;
+                        const userDetailsPack = {
+                            student, company, emailStudent, passwordStudent, firstName, lastName, dateOfBirth, numberPrefix, phoneNumber, university,
+                            faculty, specialization, yearOfStudy
+                        };
+                        return (
+                            <RegisterConfirmation userDetailsPack={ userDetailsPack }
+                            />
+                        );
+                    }
                 }
             } else if (company) {
                 switch (step) {
-                    case 2:
+                    case 2: {
+                        const { companyName, companyDomain, companyAddress } = this.state;
+                        const companyDetailes = { companyName, companyDomain, companyAddress };
                         return (
-                            <h1>Step 2 Company</h1>
+                            <FormCompanyDetails nextStep = { this.nextStep }
+                                                prevStep = { this.prevStep }
+                                                handleChange = { this.handleChange }
+                                                handleDomainChange = { this.handleEmptyEventChange }
+                                                companyDetailes = { companyDetailes }
+                            />
                         );
-                    case 3:
+                    }
+                    case 3:{
+                        const { emailCompany, passwordCompany } = this.state;
+                        const companyCredentials =  { emailCompany, passwordCompany } ;
                         return (
-                            <h1>Step 3 Company</h1>
+                            <FormCompanyCredentials nextStep = { this.nextStep }
+                                                    prevStep = { this.prevStep }
+                                                    handleChange = { this.handleChange }
+                                                    companyCredentials = { companyCredentials }
+                            />
                         );
+                    }
+                    case 4:{
+                        const {
+                            emailCompany, passwordCompany, companyName,
+                            companyDomain, companyAddress } = this.state;
+                        const companyDetails = {
+                            emailCompany, passwordCompany, companyName,
+                            companyDomain, companyAddress
+                        };
+                        return (
+                            <FormCompanyConfirmDetails nextStep={this.nextStep}
+                                                       prevStep={this.prevStep}
+                                                       companyDetails={companyDetails}
+                            />
+                        );
+                    }
+                    case 5:{
+                        const {
+                            student, company, emailCompany, passwordCompany, companyName,
+                            companyDomain, companyAddress } = this.state;
+                        const userDetailsPack = {
+                            student, company, emailCompany, passwordCompany, companyName,
+                            companyDomain, companyAddress
+                        };
+                        return (
+                            <RegisterConfirmation userDetailsPack={ userDetailsPack }
+                            />
+                        );
+                    }
                 }
             } else {
                 return (
