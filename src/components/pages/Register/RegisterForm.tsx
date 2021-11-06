@@ -78,7 +78,8 @@ export default RegisterForm;
                         const studentCredentials = { emailStudent, passwordStudent };
                             <h1>Step 4 Student</h1>
                                                     prevStep={this.prevStep}
-                                                    studentCredentials={studentCredentials}
+                                                    handleChange = { this.handleChange }
+                                                    studentCredentials={ studentCredentials }
                             />
                         );
                     }
@@ -114,12 +115,12 @@ export default RegisterForm;
                 }
                     case 2:
                         const { companyName, companyDomain, companyAddress } = this.state;
-                        const companyDetailes = { companyName, companyDomain, companyAddress };
+                        const companyDetails = { companyName, companyDomain, companyAddress };
                             <h1>Step 2 Company</h1>
                                                 prevStep = { this.prevStep }
                                                 handleChange = { this.handleChange }
                                                 handleDomainChange = { this.handleEmptyEventChange }
-                                                companyDetailes = { companyDetailes }
+                                                companyDetails = { companyDetails }
                             />
                     case 3:
                     case 3:{
