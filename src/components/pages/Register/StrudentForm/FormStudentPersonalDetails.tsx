@@ -61,7 +61,7 @@ export default class FormStudentPersonalDetails extends Component<any, any> {
                         />
                     </Form.Item>
 
-                    <Form.Item name='date-picker' label='DatePicker' {...this.config}>
+                    <Form.Item name='date-picker' label='Data of birth' {...this.config}>
                         <DatePicker onChange={this.props.handleDateChange('dateOfBirth')}
                                     defaultValue={this.personalDetailsStudent.dateOfBirth}/>
                     </Form.Item>

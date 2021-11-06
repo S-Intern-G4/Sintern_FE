@@ -1,4 +1,4 @@
-import { message } from 'antd';
+import { Form, message } from 'antd';
 import React, { Component } from 'react';
 import Container from '../../shared/Container';
 import RegisterContent from './RegisterContent';
@@ -27,7 +27,9 @@ export default class Register extends Component {
             <div>
                 <Container>
                     <RegisterContent>
-                        <RegisterForm/>
+                        <Form>
+                            <RegisterForm/>
+                        </Form>
                     </RegisterContent>
                 </Container>
             </div>

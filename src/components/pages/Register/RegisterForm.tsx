@@ -113,7 +113,8 @@ export default class RegisterForm extends Component<any, any> {
                         return (
                             <FormStudentCredentials nextStep={this.nextStep}
                                                     prevStep={this.prevStep}
-                                                    studentCredentials={studentCredentials}
+                                                    handleChange = { this.handleChange }
+                                                    studentCredentials={ studentCredentials }
                             />
                         );
                     }
@@ -152,13 +153,13 @@ export default class RegisterForm extends Component<any, any> {
                 switch (step) {
                     case 2: {
                         const { companyName, companyDomain, companyAddress } = this.state;
-                        const companyDetailes = { companyName, companyDomain, companyAddress };
+                        const companyDetails = { companyName, companyDomain, companyAddress };
                         return (
                             <FormCompanyDetails nextStep = { this.nextStep }
                                                 prevStep = { this.prevStep }
                                                 handleChange = { this.handleChange }
                                                 handleDomainChange = { this.handleEmptyEventChange }
-                                                companyDetailes = { companyDetailes }
+                                                companyDetails = { companyDetails }
                             />
                         );
                     }
