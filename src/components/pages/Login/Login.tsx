@@ -34,7 +34,7 @@ const CustomCard = styled(Card)`
   @media (max-width: 500px) {
     width: 95%;
   }
-`
+`;
 
 const Login = () => {
   const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
@@ -100,7 +100,7 @@ const Login = () => {
               />
             </CustomFormItem>
 
-            <CustomButton disabled={isLoginButtonDisabled} htmlType='submit' style={{margin: '30px auto'}}> Login </CustomButton>
+            <CustomButton disabled={ isLoginButtonDisabled } htmlType='submit' style={{margin: '30px auto'}}> Login </CustomButton>
 
             <p>
               If you do not have an account <Link to='/register'> Register here </Link>
