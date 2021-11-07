@@ -1,6 +1,5 @@
 import React from 'react';
-import Navbar from '../layout/Navbar';
-import Sider from '../layout/Sider';
+import Navbar from '../layout/navbar/Navbar';
 import Container from '../shared/Container';
 import MainContent from '../shared/MainContent';
 
@@ -10,7 +9,6 @@ const HomePage = () => {
       <Navbar />
 
       <MainContent>
-        <Sider />
       </MainContent>
     </Container >
   );
