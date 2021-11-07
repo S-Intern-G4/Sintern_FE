@@ -3,5 +3,7 @@ export const ApiEndpoints = {
   addUser: '/api/user/add-user',
   loginUser: '/api/user/login',
   getUserById: (id: string) => `/api/user/display/${id}`,
-  editUser: (id: string) => `/api/user/edit/${id}`
+  editUser: (id: string) => `/api/user/edit/${id}`,
+  domains: '/domains'
+
 };
