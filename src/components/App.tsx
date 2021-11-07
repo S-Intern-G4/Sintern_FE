@@ -18,6 +18,7 @@ const App = () => (
         <UnauthenticatedRoute path='/register' component={Register} exact />
         <UnauthenticatedRoute path='/login' component={Login} exact />
         <UnauthenticatedRoute path='/cards' component={Cards} exact />
+        <UnauthenticatedRoute path='/feed/:domainType' component={Cards} exact />
         <Redirect to='/' />
       </Switch>
     </Router>
