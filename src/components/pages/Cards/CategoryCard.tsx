@@ -1,12 +1,12 @@
 
 import styled from 'styled-components';
 import React from 'react';
-import {useHistory} from 'react-router-dom';
+
 
 interface CategoryCardProps{
     // onClick: any;
     DomainName: string;
-    ImageSRC: string;
+    // ImageSRC: string;
     Description: string;
 }
 
@@ -14,6 +14,7 @@ const CustomCard = styled.div`
     border: 2px solid #DCDCDC;
     display: flex;
     flex-direction: column;
+    border-radius: 8px;
 `
 const CardImage = styled.div`
     width: 100%;
@@ -23,7 +24,7 @@ const CardImage = styled.div`
         width: 100%;
         height: 100%;
         
-    }
+    } 
 `
 const CardDescription = styled.div`
     width: 100%;
@@ -34,17 +35,17 @@ const CardDescription = styled.div`
     p{
         padding-top: 0px;
         color: black;
-    }
+    } 
 `
 
 
-const CategoryCard = ({DomainName, ImageSRC, Description} : CategoryCardProps) => {
+const CategoryCard = ({DomainName, Description} : CategoryCardProps) => {
 
     return(
 
         <CustomCard>
             <CardImage>
-                <img src={ImageSRC} alt="example"/>
+                {/* <img src={ImageSRC} alt="example"/> */}
             </CardImage>
 
             <CardDescription>
