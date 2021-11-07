@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import CustomForm from '../../shared/CustomForm';
+import CustomForm from './CustomForm';
 
-const LoginForm = styled(CustomForm)`
+const UnauthenticatedForm = styled(CustomForm)`
   &:after {
     border-radius: 10px;
     content: '';
@@ -25,8 +25,6 @@ const LoginForm = styled(CustomForm)`
   .ant-form-item-required {
     color: #fff;
   }
-
-  
 `;
 
-export default LoginForm;
+export default UnauthenticatedForm;

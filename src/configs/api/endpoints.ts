@@ -1,8 +1,8 @@
 export const ApiEndpoints = {
   version: '/api/version/get-version',
-  addUser: '/api/user/add-user',
-  loginUser: '/api/user/login',
-  getUserById: (id: string) => `/api/user/display/${id}`,
+  companyRegister: '/api/company-register',
+  studentRegister: '/api/student-register',
+  login: '/api/user/login'
   editUser: (id: string) => `/api/user/edit/${id}`,
   domains: '/domains',
   openPositions: '/open-positions/domain'
