@@ -1,12 +1,9 @@
-export interface OpenPositions{
-    openPositions:OpenPosition[]
-}
 export interface OpenPosition{
     id:number
     name:string
     department:string
     description:string;
-    availablePositions:string;
+    availablePositions:number;
     companyName:string;
     companyDomain :string;
     companyAddress:string;

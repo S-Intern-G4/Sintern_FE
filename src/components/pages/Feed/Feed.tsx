@@ -4,22 +4,19 @@ import FeedComponent from './FeedComponent';
 import Navbar from '../../layout/navbar/Navbar';
 import Container from '../../shared/Container';
 import ApiService from '../../../services/apiService';
-import { OpenPositions } from '../../../interfaces/OpenPositions';
+import {OpenPosition} from '../../../interfaces/OpenPositions';
 import { ApiEndpoints } from '../../../configs/api/endpoints';
-
+import {useParams} from 'react-router-dom';
 
 
 const Feed = () => {
-    const [openPositions,setOpenPositions] = useState([]);
+    const [openPositions,setOpenPositions] = useState<OpenPosition[]>([]);
+    const { domain } = useParams();
 
     useEffect(()=>{
-        console.log('aici')
-
-        ApiService.get<OpenPositions>(ApiEndpoints.openPositions+'/IT')
+        ApiService.get<any>(ApiEndpoints.openPositions+'/'+domain)
             .then((data)=>{
-                console.log('acolo')
-                console.log(data)
-                setOpenPositions(data.data.openPositions);
+                setOpenPositions(data.data);
             });
     }, []);
 
@@ -27,9 +24,10 @@ const Feed = () => {
         <Container>
             <Navbar />
             <FeedContainer>
-                {openPositions.map((value)=>(
+                {openPositions.map((value,key)=>(
                     // eslint-disable-next-line react/jsx-key
-                    <FeedComponent name={value.name}
+                    <FeedComponent key={key}
+                                   name={value.name}
                                    department={value.department}
                                    companyName={value.companyName}
                                    description={value.description}
