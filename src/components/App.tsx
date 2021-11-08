@@ -5,7 +5,7 @@ import Login from './pages/Login/Login';
 import Cards from './pages/Cards/Cards';
 import { UserContextProvider } from './context/UserContext';
 import UnauthenticatedRoute from './shared/routes/UnauthenticatedRoute';
-import AuthenticatedRoute from './shared/routes/AuthenticatedRoute';
+// import AuthenticatedRoute from './shared/routes/AuthenticatedRoute';
 import Register from './pages/Register/Register';
 import Feed from './pages/Feed/Feed';
 

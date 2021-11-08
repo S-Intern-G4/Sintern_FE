@@ -22,6 +22,7 @@ const UnauthenticatedPageContent = styled(MainContent)`
   .ant-card-head-title {
     font-size: 2rem;
     font-weight: bold;
+    text-align: center;
   }
 `;
 
