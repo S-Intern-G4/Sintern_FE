@@ -5,6 +5,7 @@ const FeedContainer = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  margin:0 auto;
   width: 70%;
   @media (max-width:1000px){
     width:95%;
