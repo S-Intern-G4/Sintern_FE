@@ -44,7 +44,7 @@ const Login = () => {
         <CustomCard title='Login' bordered={false}>
 
           <UnauthenticatedForm
-            name="loginForm"
+            name='loginForm'
             initialValues={{ remember: true }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}

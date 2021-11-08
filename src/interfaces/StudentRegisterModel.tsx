@@ -1,12 +1,12 @@
 export interface StudentRegisterModel {
+  email: string
+  password: string
   firstName: string
   lastName: string
-  email: string
   dateOfBirth: Date
-  password: string
-  passwordRepeat: string,
-  university: string,
-  faculty: string,
-  specialization: string,
+  phoneNumber: string
+  university: string
+  faculty: string
+  specialization: string
   yearOfStudy: string
 }

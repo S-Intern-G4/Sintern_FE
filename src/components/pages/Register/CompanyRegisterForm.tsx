@@ -28,12 +28,13 @@ interface StudentRegisterFormProps {
 
 const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
   const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] = useState(false);
-  const [ apiErrors, setApiErrors] = useState([]);
+  const [apiErrors, setApiErrors] = useState([]);
   const [form] = UnauthenticatedForm.useForm();
   const history = useHistory();
 
   const handleRegisterSubmit = (values: CompanyRegisterModel) => {
     setIsRegisterButtonDisabled(true);
+    values.domain = values.domain[0];
     ApiService.post<any, CompanyRegisterModel>(ApiEndpoints.companyRegister, values)
       .then(() => {
         history.push('/login');
@@ -50,11 +51,11 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
         form={form}
         onFinish={handleRegisterSubmit}
         initialValues={{
-          firstname: '',
-          lastname: '',
           email: '',
-          username: '',
-          password: ''
+          password: '',
+          name: '',
+          domain: null,
+          passwordRepeat: '',
         }
         }
       >
@@ -177,7 +178,7 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
             })
           ]}
         >
-          <Input.Password placeholder='******'/>
+          <Input.Password placeholder='******' />
         </CustomFormItem>
 
         <ButtonsContainer>

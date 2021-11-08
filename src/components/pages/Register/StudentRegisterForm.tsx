@@ -58,7 +58,6 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
   const history = useHistory();
   const [secondForm] = UnauthenticatedForm.useForm();
 
-
   const [fisrtPageValues, setFirstPageValues] = useState({
     firstName: '',
     lastName: '',
@@ -85,6 +84,9 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
     setIsRegisterButtonDisabled(true);
 
     const requestValues = { ...fisrtPageValues, ...values };
+    requestValues.university = requestValues.university[0];
+    requestValues.faculty = requestValues.faculty[0];
+    requestValues.specialization = requestValues.specialization[0];
 
     ApiService.post<any, StudentRegisterModel>(ApiEndpoints.studentRegister, requestValues)
       .then(() => {

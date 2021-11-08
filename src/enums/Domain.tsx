@@ -1,22 +1,26 @@
 export const Domain = [
   {
-    value: 1,
-    label: 'Domain 1'
+    value: 'IT',
+    label: 'IT'
   },
   {
-    value: 2,
-    label: 'Domain 2'
+    value: 'MEDICINE',
+    label: 'Medicine'
   },
   {
-    value: 3,
-    label: 'Domain 3'
+    value: 'CHEMISTRY',
+    label: 'Chemistry'
   },
   {
-    value: 4,
-    label: 'Domain 4'
+    value: 'MILITARY',
+    label: 'Military'
   },
   {
-    value: 5,
-    label: 'Domain 5'
+    value: 'FINANCE',
+    label: 'Finance'
+  },
+  {
+    value: 'OTHER',
+    label: 'Other'
   }
 ];
