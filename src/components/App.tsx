@@ -6,15 +6,17 @@ import { UserContextProvider } from './context/UserContext';
 import UnauthenticatedRoute from './shared/routes/UnauthenticatedRoute';
 import AuthenticatedRoute from './shared/routes/AuthenticatedRoute';
 import Register from './pages/Register/Register';
+import Feed from './pages/Feed/Feed';
+
 
 const App = () => (
   <UserContextProvider>
     <Router>
       <Switch>
-        <AuthenticatedRoute path='/' component={Cards} exact />
+        <UnauthenticatedRoute path='/' component={Cards} exact />
         <UnauthenticatedRoute path='/register' component={Register} exact />
         <UnauthenticatedRoute path='/login' component={Login} exact />
-        <UnauthenticatedRoute path='/feed/:domainType' component={Cards} exact />
+        <UnauthenticatedRoute path='/feed/:domain' component={Feed} exact />
         <Redirect to='/' />
       </Switch>
     </Router>
