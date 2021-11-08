@@ -5,8 +5,6 @@ const Container = styled.div`
   height: 100vh;
   color: #107d9e;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  overflow: scroll;
-  border: 3px solid green;
 `;
 
 export default Container;

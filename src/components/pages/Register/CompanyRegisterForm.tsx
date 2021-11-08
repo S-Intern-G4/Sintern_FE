@@ -55,7 +55,7 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
           password: '',
           name: '',
           domain: null,
-          passwordRepeat: '',
+          passwordRepeat: ''
         }
         }
       >

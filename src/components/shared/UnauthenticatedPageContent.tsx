@@ -6,6 +6,9 @@ const UnauthenticatedPageContent = styled(MainContent)`
   background-image: url(${unauthenticated_form_background});
   background-position: center;
   background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .ant-card {
     background: transparent;
