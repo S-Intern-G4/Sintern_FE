@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Image } from 'antd';
 
@@ -43,23 +43,19 @@ const MyImage = styled(Image)`
 `;
 
 const FeedComponent = (props) => {
-    const [expand, setExpand] = useState(false);
-    const onClick = () => {
-        setExpand(!expand);
-    };
     return (
         <CardFeed >
-                <MyImage
-                    width={200}
-                    src="https://gradschool.utk.edu/wp-content/uploads/sites/24/2016/07/JobIcon-300x300.png"
-                />
-                <TextCard>
-                    <CompanyName><strong>Company name:</strong> {props.companyName}</CompanyName>
-                    <Name><strong>Open position name: </strong>{props.name}</Name>
-                    <Description><strong>Description:</strong> {props.description}</Description>
-                    <Department><strong>Department:</strong> {props.department}</Department>
-                    <NumberOfMaxStudents><strong>Maximum number of students:</strong> {props.numberOfMaxStudents}</NumberOfMaxStudents>
-                </TextCard>
+            <MyImage
+                width={200}
+                src="https://gradschool.utk.edu/wp-content/uploads/sites/24/2016/07/JobIcon-300x300.png"
+            />
+            <TextCard>
+                <CompanyName><strong>Company name:</strong> {props.companyName}</CompanyName>
+                <Name><strong>Open position name: </strong>{props.name}</Name>
+                <Description><strong>Description:</strong> {props.description}</Description>
+                <Department><strong>Department:</strong> {props.department}</Department>
+                <NumberOfMaxStudents><strong>Maximum number of students:</strong> {props.numberOfMaxStudents}</NumberOfMaxStudents>
+            </TextCard>
         </CardFeed>
     );
 };

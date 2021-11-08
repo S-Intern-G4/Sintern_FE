@@ -1,5 +1,5 @@
 import { Input, Tooltip } from 'antd';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import Container from '../../shared/Container';
 import CustomButton from '../../shared/CustomButton';
@@ -9,6 +9,12 @@ import CustomFormItem from '../../shared/CustomFormItem';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import CustomCard from '../../shared/CustomCard';
 import UnauthenticatedPageContent from '../../shared/UnauthenticatedPageContent';
+import ApiService from '../../../services/apiService';
+import { ApiEndpoints } from '../../../configs/api/endpoints';
+import { UserContext } from '../../context/UserContext';
+import { UserLoginModel } from '../../../interfaces/user/UserLoginModel';
+import { UserInfo } from '../../../interfaces/user/UserInfo';
+import ErrorHeader from '../../shared/ErrorHeader';
 
 const Logo = styled.div`
   width: 200px;
@@ -22,15 +28,24 @@ const Logo = styled.div`
 
 const Login = () => {
   const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
+  const { setUserId, setFirstName, setLastName } = useContext(UserContext);
+  const [apiErrors, setApiErrors] = useState([]);
 
-  const onFinish = (values: any) => {
-    // eslint-disable-next-line no-console
-    console.log('Success:', values);
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    // eslint-disable-next-line no-console
-    console.log('Failed:', errorInfo);
+  const loginSubmit = (values: UserLoginModel) => {
+    setIsLoginButtonDisabled(true);
+    ApiService.post<UserInfo, UserLoginModel>(ApiEndpoints.login, values)
+      .then(({ data: { id, firstName, lastName } }) => {
+        localStorage.setItem('userId', id);
+        localStorage.setItem('firstName', firstName);
+        localStorage.setItem('lastName', lastName);
+        setUserId(id);
+        setFirstName(firstName);
+        setLastName(lastName);
+      })
+      .catch((error) => {
+        setApiErrors(error.errorMessages);
+        setIsLoginButtonDisabled(false);
+      });
   };
 
   return (
@@ -46,13 +61,24 @@ const Login = () => {
           <UnauthenticatedForm
             name='loginForm'
             initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
+            onFinish={loginSubmit}
             autoComplete='off'
           >
+
+            <ErrorHeader>
+              {
+                apiErrors.map((error, index) => {
+                  return (
+                    <p key={index}>{error}</p>
+                  );
+                })
+              }
+            </ErrorHeader>
+
+
             <CustomFormItem
               label='Email'
-              name='email'
+              name='username'
               rules={[
                 { required: true, message: 'Email is required' }
               ]}
