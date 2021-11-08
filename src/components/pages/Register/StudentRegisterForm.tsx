@@ -19,7 +19,7 @@ import { StudentRegisterModel } from '../../../interfaces/StudentRegisterModel';
 const NamesContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-center;
+  justify-content: center;
   align-items: center;
   text-align: center;
   font-size: 150px;
@@ -29,7 +29,7 @@ const NamesContainer = styled.div`
     margin-right: 5px;
   }
 
-  .ant-row:second-child {
+  .ant-row:nth-child(2) {
     margin-left: 5px;
   }
 
@@ -66,13 +66,6 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
     phone: '',
     password: '',
     confirmPassword: ''
-  });
-
-  const [secondPageValues, setSecondPageValues] = useState({
-    university: null,
-    faculty: null,
-    specialization: null,
-    yearOfStudy: ''
   });
 
   const handleNext = (values) => {
@@ -264,7 +257,6 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
         <UnauthenticatedForm
           form={secondForm}
           onFinish={handleRegisterSubmit}
-          initialValues={secondPageValues}
         >
 
           <ErrorHeader>
@@ -329,7 +321,7 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
           </CustomFormItem>
 
           <ButtonsContainer>
-            <CustomButton onClick={() => { setShowEducationDetails(false); setSecondPageValues(secondForm.values); }}> Back </CustomButton>
+            <CustomButton onClick={() => { setShowEducationDetails(false); }}> Back </CustomButton>
             <CustomButton disabled={isRegisterButtonDisabled} htmlType='submit'> Register </CustomButton>
           </ButtonsContainer>
 

@@ -47,7 +47,7 @@ const FeedComponent = (props) => {
         <CardFeed >
             <MyImage
                 width={200}
-                src="https://gradschool.utk.edu/wp-content/uploads/sites/24/2016/07/JobIcon-300x300.png"
+                src='https://gradschool.utk.edu/wp-content/uploads/sites/24/2016/07/JobIcon-300x300.png'
             />
             <TextCard>
                 <CompanyName><strong>Company name:</strong> {props.companyName}</CompanyName>
