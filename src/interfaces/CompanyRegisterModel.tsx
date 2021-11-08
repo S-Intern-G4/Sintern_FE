@@ -3,5 +3,5 @@ export interface CompanyRegisterModel {
   password: string
   name: string
   domain: string
-  passwordRepeat: string
+  address: string
 }

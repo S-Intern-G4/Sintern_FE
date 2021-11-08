@@ -69,7 +69,7 @@ const Login = () => {
             </CustomFormItem>
 
             <CustomFormItem
-              label='Password'
+              label={'Password'}
               name='password'
               rules={[
                 { required: true, message: 'Password is required' }
