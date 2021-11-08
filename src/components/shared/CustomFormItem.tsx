@@ -26,6 +26,10 @@ const CustomFormItem = styled(Form.Item)`
       flex-direction: column;
     }
   }
+
+  .ant-picker {
+    width: 100%;
+  }
 `;
 
 export default CustomFormItem;

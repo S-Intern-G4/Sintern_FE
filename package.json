@@ -1,7 +1,7 @@
 {
-  "name": "booking.spa",
+  "name": "s.intern",
   "version": "1.0.0",
-  "description": "Booking SPA",
+  "description": "Searching for Internships",
   "main": "src/index.tsx",
   "scripts": {
     "start": "webpack serve --env CONFIG=config --config webpack.dev.js",
@@ -10,9 +10,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://tfs17.evozon.com/tfs/internship/2021-Team1/_git/FE"
+    "url": "https://github.com/S-Intern-G4/Sintern_FE.git"
   },
-  "author": "Internship 2021",
+  "author": "Team G4 - S-Intern",
   "license": "ISC",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
