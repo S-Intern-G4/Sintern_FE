@@ -17,7 +17,7 @@ module.exports = (env) => ({
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Booking',
+      title: 'S-Intern',
       configFile: env.CONFIG,
       template: path.resolve(__dirname, 'public', 'index.html'),
       filename: 'index.html',

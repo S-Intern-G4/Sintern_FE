@@ -11,12 +11,12 @@ const CustomButton = styled(Button)`
   display: flex;
   align-items: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  z-index:1;
+  z-index: 1;
 
   &.ant-btn:hover:enabled,
   &.ant-btn:active:enabled,
   &.ant-btn:focus:enabled {
-    background-color: #1890ff;
+    background-color: #0059b3;
     color: #fff;
   }
 `;

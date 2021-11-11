@@ -1,13 +1,21 @@
-import { Checkbox, Form, Input, Card } from 'antd';
-import React from 'react';
+import { Input, Tooltip } from 'antd';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import Container from '../../shared/Container';
 import CustomButton from '../../shared/CustomButton';
-import CustomForm from '../../shared/CustomForm';
-import MainContent from '../../shared/MainContent';
 import { Link } from 'react-router-dom';
-import LoginContent from './LoginContent';
-import LoginForm from './LoginForm';
+import UnauthenticatedForm from '../../shared/UnauthenticatedForm';
+import CustomFormItem from '../../shared/CustomFormItem';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import CustomCard from '../../shared/CustomCard';
+import UnauthenticatedPageContent from '../../shared/UnauthenticatedPageContent';
+import ApiService from '../../../services/apiService';
+import { ApiEndpoints } from '../../../configs/api/endpoints';
+import { UserContext } from '../../context/UserContext';
+import { UserLoginModel } from '../../../interfaces/user/UserLoginModel';
+import { UserInfo } from '../../../interfaces/user/UserInfo';
+import ErrorHeader from '../../shared/ErrorHeader';
+import { useHistory } from 'react-router-dom';
 
 const Logo = styled.div`
   width: 200px;
@@ -19,70 +27,95 @@ const Logo = styled.div`
   }
 `;
 
-
 const Login = () => {
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-  };
+  const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
+  const { setToken } = useContext(UserContext);
+  const [apiError, setApiError] = useState('');
+  const history = useHistory();
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+  const loginSubmit = (values: UserLoginModel) => {
+    setIsLoginButtonDisabled(true);
+    ApiService.post<UserInfo, UserLoginModel>(ApiEndpoints.login, values)
+      .then(({ data: { token } }) => {
+        localStorage.setItem('token', token);
+        setToken(token);
+        history.push('/');
+      })
+      .catch((error) => {
+        setApiError(error.response.data.errorMessage);
+        setIsLoginButtonDisabled(false);
+      });
   };
 
   return (
     <Container>
-      <LoginContent>
+      <UnauthenticatedPageContent>
 
         <Logo>
           <img src='/src/assets/images/logo.png' alt='logo' />
         </Logo>
 
-        <Card title='Login' bordered={false}>
+        <CustomCard title='Login' bordered={false}>
 
-          <LoginForm
-            name="basic"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
+          <UnauthenticatedForm
+            name='loginForm'
             initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
+            onFinish={loginSubmit}
+            autoComplete='off'
           >
-            <Form.Item
-              label="Email"
-              name="email"
-              rules={[{ required: true, message: 'Please input your username!' }]}
+
+            <ErrorHeader>
+              <p>{apiError}</p>
+            </ErrorHeader>
+
+            <CustomFormItem
+              label='Email'
+              name='email'
+              rules={[
+                { required: true, message: 'Email is required' }
+              ]}
+              hasFeedback
             >
-              <Input />
-            </Form.Item>
+              <Input
+                placeholder='johndoe@gmail.com'
+                suffix={
+                  <Tooltip title={'Email is required'}>
+                    <InfoCircleOutlined style={{ color: '#1890ff' }} />
+                  </Tooltip>
+                }
+              />
+            </CustomFormItem>
 
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[{ required: true, message: 'Please input your password!' }]}
+            <CustomFormItem
+              label={'Password'}
+              name='password'
+              rules={[
+                { required: true, message: 'Password is required' }
+              ]}
+              hasFeedback
             >
-              <Input.Password />
-            </Form.Item>
+              <Input.Password
+                placeholder='******'
+                suffix={
+                  <Tooltip title={'Password is required'}>
+                    <InfoCircleOutlined style={{ color: '#1890ff' }} />
+                  </Tooltip>
+                }
+              />
+            </CustomFormItem>
 
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-              <CustomButton type="primary" htmlType="submit">
-                Login
-              </CustomButton>
-            </Form.Item>
+            <CustomButton disabled={isLoginButtonDisabled} htmlType='submit' style={{ margin: '30px auto' }}> Login </CustomButton>
 
-
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-              <Link to={'/register'}>
-                Don’t have an account? Register here
-              </Link>
-            </Form.Item>
-
-
-          </LoginForm>
+            <p>
+              If you do not have an account <Link to='/register'> Register here </Link>
+            </p>
 
 
-        </Card>
-      </LoginContent>
+          </UnauthenticatedForm>
+
+
+        </CustomCard>
+      </UnauthenticatedPageContent>
     </Container>
   );
 };

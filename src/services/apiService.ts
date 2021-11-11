@@ -19,6 +19,7 @@ class ApiService {
   public put<ResponseDataType, BodyType, Response = AxiosResponse<ResponseDataType>>(url: string, data: BodyType, config?: AxiosRequestConfig): Promise<Response> {
     return this._api.put(url,data,config);
   }
+  
 }
 
 export default new ApiService();

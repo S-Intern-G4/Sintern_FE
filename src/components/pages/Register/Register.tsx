@@ -1,143 +1,94 @@
-import { Link } from 'react-router-dom';
-import { Button, Card, DatePicker, Dropdown, Form, Input, Menu, message, Select } from 'antd';
-import React from 'react';
-import Navbar from '../../layout/navbar/Navbar';
-import Container from '../../shared/Container';
-import RegisterContent from './RegisterContent';
-import RegisterForm from './RegisterForm';
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import CustomButton from '../../shared/CustomButton';
-import { DownOutlined, UserOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import CustomCard from '../../shared/CustomCard';
+import Container from '../../shared/Container';
+import UnauthenticatedPageContent from '../../shared/UnauthenticatedPageContent';
+import StudentRegisterForm from './StudentRegisterForm';
+import CompanyRegisterForm from './CompanyRegisterForm';
+
+const OptionsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &:after {
+    border-radius: 10px;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.6);
+    opacity: 1;
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    z-index: ;
+  }
+`;
+
+const ButtonsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 30px;
+`;
+
+const Logo = styled.div`
+  width: 200px;
+  margin-bottom: 20px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
 
 const Register = () => {
-
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
-
-  const { Option } = Select;
-
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select style={{ width: 70 }}>
-        <Option value="86">+86</Option>
-        <Option value="87">+87</Option>
-      </Select>
-    </Form.Item>
-  );
-
-  const { RangePicker } = DatePicker;
-
-  const config = {
-    rules: [{ type: 'object' as const, required: true, message: 'Please select time!' }],
-  };
-  
-  function handleMenuClick(e) {
-    message.info('Click on menu item.');
-    console.log('click', e);
-  }
-  
-  const menu = (
-    <Menu onClick={handleMenuClick}>
-      <Menu.Item key="1" icon={<UserOutlined />}>
-        1st menu item
-      </Menu.Item>
-      <Menu.Item key="2" icon={<UserOutlined />}>
-        2nd menu item
-      </Menu.Item>
-      <Menu.Item key="3" icon={<UserOutlined />}>
-        3rd menu item
-      </Menu.Item>
-    </Menu>
-  );
+  const [studentRegister, setStudentRegister] = useState(false);
+  const [companyRegister, setCompanyRegister] = useState(false);
 
   return (
     <Container>
-      <RegisterContent>
-        <Card title='Register' bordered={false}>
-          <RegisterForm
-            name="basic"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-          >
-            <Form.Item
-              label="Email"
-              name="email"
-              rules={[{ required: true, message: 'Please input your username!' }]}
-            >
-              <Input />
-            </Form.Item>
+      <UnauthenticatedPageContent>
 
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[{ required: true, message: 'Please input your password!' }]}
-            >
-              <Input.Password />
-            </Form.Item>
+        <Logo>
+          <img src='/src/assets/images/logo.png' alt='logo' />
+        </Logo>
 
-            <Form.Item
-              label="First Name"
-              name="first_name"
-              rules={[{ required: true, message: 'Please input your first name!' }]}
-            >
-              <Input />
-            </Form.Item>
+        {
+          !studentRegister && !companyRegister &&
+          <CustomCard title='What do you want to register as?' bordered={false}>
+            <OptionsContainer>
+              <h1></h1>
 
-            <Form.Item
-              label="Last Name"
-              name="last_name"
-              rules={[{ required: true, message: 'Please input your last name!' }]}
-            >
-              <Input />
-            </Form.Item>
+              <ButtonsContainer>
+                <CustomButton onClick={() => { setStudentRegister(true); }}>Student</CustomButton>
+                <CustomButton onClick={() => { setCompanyRegister(true); }}>Company</CustomButton>
+              </ButtonsContainer>
 
-            <Form.Item name="date-picker" label="DatePicker" {...config}>
-              <DatePicker />
-            </Form.Item>
+              <p>If you already have an account <Link to='/login'> Login here </Link></p>
 
-            <Form.Item
-              name="phone"
-              label="Phone Number"
-              rules={[{ required: true, message: 'Please input your phone number!' }]}
-            >
-              <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
-            </Form.Item>
+            </OptionsContainer>
+          </CustomCard>
+        }
 
-            <Form.Item name="educationDetails" label="Education Details" rules={[{ required: true }]}>
-              <Select
-                  placeholder="Select a option and change input text above"
-                  allowClear
-              >
-                <Option value="male">male</Option>
-                <Option value="female">female</Option>
-                <Option value="other">other</Option>
+        {
+          studentRegister &&
+          <StudentRegisterForm onBackClick={() => setStudentRegister(false)} />
+        }
 
-              </Select>
-            </Form.Item>
+        {
+          companyRegister &&
+          <CompanyRegisterForm onBackClick={() => setCompanyRegister(false)}/>
+        }
 
-
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-              <Link to={'/login'}>
-                <CustomButton type="primary" htmlType="submit">
-                  Save
-                </CustomButton>
-              </Link>
-            </Form.Item>
-
-
-          </RegisterForm>
-
-
-        </Card>
-      </RegisterContent>
+      </UnauthenticatedPageContent>
     </Container>
   );
 };
