@@ -15,6 +15,7 @@ import { UserContext } from '../../context/UserContext';
 import { UserLoginModel } from '../../../interfaces/user/UserLoginModel';
 import { UserInfo } from '../../../interfaces/user/UserInfo';
 import ErrorHeader from '../../shared/ErrorHeader';
+import { useHistory } from 'react-router-dom';
 
 const Logo = styled.div`
   width: 200px;
@@ -28,22 +29,20 @@ const Logo = styled.div`
 
 const Login = () => {
   const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
-  const { setUserId, setFirstName, setLastName } = useContext(UserContext);
-  const [apiErrors, setApiErrors] = useState([]);
+  const { setToken } = useContext(UserContext);
+  const [apiError, setApiError] = useState('');
+  const history = useHistory();
 
   const loginSubmit = (values: UserLoginModel) => {
     setIsLoginButtonDisabled(true);
     ApiService.post<UserInfo, UserLoginModel>(ApiEndpoints.login, values)
-      .then(({ data: { id, firstName, lastName } }) => {
-        localStorage.setItem('userId', id);
-        localStorage.setItem('firstName', firstName);
-        localStorage.setItem('lastName', lastName);
-        setUserId(id);
-        setFirstName(firstName);
-        setLastName(lastName);
+      .then(({ data: { token } }) => {
+        localStorage.setItem('token', token);
+        setToken(token);
+        history.push('/');
       })
       .catch((error) => {
-        setApiErrors(error.errorMessages);
+        setApiError(error.response.data.errorMessage);
         setIsLoginButtonDisabled(false);
       });
   };
@@ -66,19 +65,12 @@ const Login = () => {
           >
 
             <ErrorHeader>
-              {
-                apiErrors.map((error, index) => {
-                  return (
-                    <p key={index}>{error}</p>
-                  );
-                })
-              }
+              <p>{apiError}</p>
             </ErrorHeader>
-
 
             <CustomFormItem
               label='Email'
-              name='username'
+              name='email'
               rules={[
                 { required: true, message: 'Email is required' }
               ]}

@@ -28,7 +28,7 @@ interface StudentRegisterFormProps {
 
 const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
   const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] = useState(false);
-  const [apiErrors, setApiErrors] = useState([]);
+  const [apiError, setApiError] = useState('');
   const [form] = UnauthenticatedForm.useForm();
   const history = useHistory();
 
@@ -40,7 +40,7 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
         history.push('/login');
       })
       .catch((error) => {
-        setApiErrors(error.errorMessages);
+        setApiError(error.errorMessages);
         setIsRegisterButtonDisabled(false);
       });
   };
@@ -61,13 +61,7 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
       >
 
         <ErrorHeader>
-          {
-            apiErrors.map((error, index) => {
-              return (
-                <p key={index}>{error}</p>
-              );
-            })
-          }
+          <p>{apiError}</p>
         </ErrorHeader>
 
         <CustomFormItem

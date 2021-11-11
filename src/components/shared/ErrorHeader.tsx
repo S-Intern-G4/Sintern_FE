@@ -7,10 +7,13 @@ const ErrorHeader = styled.div`
   justify-content: center;
   width: 80%;
   z-index: 2;
-  color: red;
   font-size: 1.1rem;
   margin: 5px auto;
   text-align: center;
+
+  p {
+    color: red;
+  }
 `;
 
 export default ErrorHeader;

@@ -24,6 +24,7 @@ const CardImage = styled.div`
 `;
 const CardDescription = styled.div`
     width: 100%;
+    text-align: center;
     
     h2{
         padding-top: 10px;
