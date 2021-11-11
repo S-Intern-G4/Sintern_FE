@@ -3,12 +3,12 @@ import { Route, Redirect, RouteProps } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
 const AuthenticatedRoute = ({ component: Component, ...rest }: RouteProps) => {
-  const { userId } = useContext(UserContext);
+  const { token } = useContext(UserContext);
   return (
     <Route
       {...rest}
       render={(routeProps) => {
-        if (!userId) return <Redirect to='/login' />;
+        if (!token) return <Redirect to='/login' />;
 
         return <Component {...routeProps} />;
       }}
