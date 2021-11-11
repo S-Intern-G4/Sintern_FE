@@ -10,6 +10,10 @@ const UnauthenticatedPageContent = styled(MainContent)`
   flex-direction: column;
   align-items: center;
 
+  label {
+    color: #fff;
+  }
+
   .ant-card {
     background: transparent;
   }

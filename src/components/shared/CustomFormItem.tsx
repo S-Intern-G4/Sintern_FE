@@ -10,10 +10,6 @@ const CustomFormItem = styled(Form.Item)`
   z-index: 1;
   margin: 0;
 
-  label {
-    color: #fff;
-  }
-
   .ant-form-item-label {
     display: flex;
   }
