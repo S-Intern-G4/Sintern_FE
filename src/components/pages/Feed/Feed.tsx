@@ -25,13 +25,15 @@ const Feed = () => {
             <Navbar />
             <FeedContainer>
                 {openPositions.map((value, key) => (
-                    <FeedComponent key={key}
+                    <FeedComponent
+                        companyLogo = {value.companyLogo}
+                        key={key}
                         name={value.name}
                         department={value.department}
                         companyName={value.companyName}
                         description={value.description}
-                        numberOfMaxStudents={value.availablePositions}
-                    />
+                        numberOfMaxStudents={value.availablePositions}>
+                    </FeedComponent>
                 ))}
             </FeedContainer>
 
