@@ -17,9 +17,9 @@ const App = () => (
       <Switch>
         <UnauthenticatedRoute path='/register' component={Register} exact />
         <UnauthenticatedRoute path='/login' component={Login} exact />
-        <AuthenticatedRoute path='/' component={Cards} exact />
-        <AuthenticatedRoute path='/feed/:domain' component={Feed} exact />
-        <AuthenticatedRoute path='/profile' component={Profile} exact />
+        <UnauthenticatedRoute path='/' component={Cards} exact />
+        <UnauthenticatedRoute path='/feed/:domain' component={Feed} exact />
+        <UnauthenticatedRoute path='/profile' component={Profile} exact />
         <Redirect to='/' />
       </Switch>
     </Router>
