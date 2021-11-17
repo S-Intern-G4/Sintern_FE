@@ -6,4 +6,5 @@ export interface DomainsResponseModel{
 export interface Domain{
     description: string
     domainType: string
+    domainImage: string
 }
