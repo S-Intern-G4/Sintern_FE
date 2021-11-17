@@ -4,7 +4,7 @@ import { Image } from 'antd';
 
 const CardFeed = styled.div`
   width: 100%;
-  margin: 10px;
+  margin: 10px 0px;
   background-color: #2193b0;
   color:black;
   border-radius: 8px;
@@ -47,7 +47,7 @@ const FeedComponent = (props) => {
         <CardFeed >
             <MyImage
                 width={200}
-                src='https://gradschool.utk.edu/wp-content/uploads/sites/24/2016/07/JobIcon-300x300.png'
+                src={`data:image/jpeg;base64,${props.companyLogo}`}
             />
             <TextCard>
                 <CompanyName><strong>Company name:</strong> {props.companyName}</CompanyName>
