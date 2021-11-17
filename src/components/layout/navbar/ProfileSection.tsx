@@ -28,12 +28,17 @@ const CustomUserIcon = styled(UserOutlined)`
 const ProfileSection = () => {
   const history = useHistory();
 
-  const menu = (
+    function handleButtonLogout() {
+        localStorage.clear();
+        location.href='login'
+    }
+
+    const menu = (
     <Menu onClick={() => history.push('/profile')}>
       <Menu.Item onClick={() => history.push('/profile')}>
         Profile
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item onClick={handleButtonLogout}>
         Sign out
       </Menu.Item>
     </Menu>

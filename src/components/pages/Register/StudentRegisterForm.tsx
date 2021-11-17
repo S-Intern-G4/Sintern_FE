@@ -81,7 +81,6 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
     requestValues.faculty = requestValues.faculty[0];
     requestValues.specialization = requestValues.specialization[0];
 
-    console.log(requestValues)
     ApiService.post<any, StudentRegisterModel>(ApiEndpoints.studentRegister, requestValues)
       .then(() => {
         history.push('/login');
