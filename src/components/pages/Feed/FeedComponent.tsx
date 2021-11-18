@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Image } from 'antd';
+import CustomButton from '../../shared/CustomButton';
 
 const CardFeed = styled.div`
   width: 100%;
@@ -42,6 +43,10 @@ const MyImage = styled(Image)`
     margin: 20px 0px 20px 0px;
 `;
 
+const ApplyButton = styled(CustomButton)`
+  align-self: flex-end;
+`;
+
 const FeedComponent = (props) => {
 
     return (
@@ -56,6 +61,7 @@ const FeedComponent = (props) => {
                 <Description><strong>Description:</strong> {props.description}</Description>
                 <Department><strong>Department:</strong> {props.department}</Department>
                 <NumberOfMaxStudents><strong>Maximum number of students:</strong> {props.numberOfMaxStudents}</NumberOfMaxStudents>
+                <ApplyButton onClick={props.showApplyModal}>Apply</ApplyButton>
             </TextCard>
         </CardFeed>
     );
