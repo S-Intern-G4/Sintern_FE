@@ -7,11 +7,15 @@ import ApiService from '../../../services/apiService';
 import { OpenPosition } from '../../../interfaces/OpenPositions';
 import { ApiEndpoints } from '../../../configs/api/endpoints';
 import { useParams } from 'react-router-dom';
+import ApplyModal from './ApplyModal';
 
 
 const Feed = () => {
+
     const [openPositions, setOpenPositions] = useState<OpenPosition[]>([]);
     const { domain } = useParams();
+
+    const [applyModalVisibility, setApplyModalVisibility] = useState(false);
 
     useEffect(() => {
         ApiService.get<any>(ApiEndpoints.openPositions + '/' + domain)
@@ -19,6 +23,10 @@ const Feed = () => {
                 setOpenPositions(data.data);
             });
     }, []);
+
+    const showApplyModal = () => {
+        setApplyModalVisibility(prev => !prev);
+    }
 
     return (
         <Container>
@@ -32,11 +40,12 @@ const Feed = () => {
                         department={value.department}
                         companyName={value.companyName}
                         description={value.description}
-                        numberOfMaxStudents={value.availablePositions}>
+                        numberOfMaxStudents={value.availablePositions}
+                        showApplyModal = {showApplyModal}>
                     </FeedComponent>
                 ))}
             </FeedContainer>
-
+            <ApplyModal applyModalVisibility={applyModalVisibility} setApplyModalVisibility={setApplyModalVisibility} />
         </Container>
     );
 };
