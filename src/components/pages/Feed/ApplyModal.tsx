@@ -1,5 +1,5 @@
 import { Form, Input, Select } from "antd";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ApiEndpoints } from "../../../configs/api/endpoints";
 import CustomButton from "../../shared/CustomButton";
 import ApiService from '../../../services/apiService';
@@ -18,7 +18,7 @@ const tailLayout = {
 
 const ApplyModal = (props) => {
 
-    // const { id } = useContext(UserContext);
+    const { id } = useContext(UserContext);
 
     const {handleOk} = props;
 
@@ -29,7 +29,7 @@ const ApplyModal = (props) => {
     const handleSubmit = (values: any) => {
         setIsSubmitButtonDisabled(true);
         ApiService.post<any, Application>(ApiEndpoints.applyOpenPosition, {
-            studentID: "2",
+            studentID: id,
             openInternPositionID: props.openInternPositionID,
             description: values.description
         })
