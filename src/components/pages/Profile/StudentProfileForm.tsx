@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import { Cascader, DatePicker, Input, Tooltip } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
@@ -11,6 +11,10 @@ import CustomForm from '../../shared/CustomForm';
 import { University } from '../../../enums/University';
 import { Faculty } from '../../../enums/Faculty';
 import { Specialization } from '../../../enums/Specialization';
+import ApiService from '../../../services/apiService';
+import { ApiEndpoints } from '../../../configs/api/endpoints';
+import { UserContext } from '../../context/UserContext';
+import moment from 'moment';
 
 const NamesContainer = styled.div`
   width: 100%;
@@ -36,13 +40,29 @@ const NamesContainer = styled.div`
 `;
 
 const StudentProfileForm = () => {
+  const { id } = useContext(UserContext);
   const [isUpdateButtonDisabled, setIsUpdateButtonDisabled] = useState(false);
   const [apiError, setApiError] = useState('');
   const [form] = UnauthenticatedForm.useForm();
-  const history = useHistory();
+
+  useEffect(() => {
+    ApiService.get<any>(ApiEndpoints.students(id))
+      .then(({ data }) => {
+        form.setFieldsValue({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          phoneNumber: data.phoneNumber,
+          dateOfBirth:  moment(data.dateOfBirth),
+          university: [data.educationDetails.university],
+          faculty: [data.educationDetails.faculty],
+          specialization: [data.educationDetails.specialization],
+          yearOfStudy: data.educationDetails.yearOfStudy
+        });
+      });
+  }, [])
 
   const handleUpdateSubmit = values => {
-     // TODO: update student endpoint
+    // TODO: update student endpoint
   };
 
   return (
@@ -115,7 +135,7 @@ const StudentProfileForm = () => {
 
       <CustomFormItem
         label='Phone number'
-        name='phone'
+        name='phoneNumber'
         rules={[
           { required: true, message: 'Phone number is required' },
           { pattern: /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/g, message: 'Invalid phone number' }
@@ -150,7 +170,7 @@ const StudentProfileForm = () => {
         ]}
         hasFeedback
       >
-        <Cascader options={Faculty} placeholder='Faculty domain' />
+        <Cascader options={Faculty} placeholder='Faculty' />
       </CustomFormItem>
 
       <CustomFormItem
@@ -168,14 +188,13 @@ const StudentProfileForm = () => {
         label='Year of study'
         name='yearOfStudy'
         rules={[
-          { required: true, message: 'Year of study is required' },
-          { pattern: /^[123456]$/g, message: 'Invalid year' }
+          { required: true, message: 'Year of study is required' }
         ]}
         hasFeedback
       >
         <Input
           suffix={
-            <Tooltip title='Year of study is required. Year of study should have a valid format'>
+            <Tooltip title='Year of study is required'>
               <InfoCircleOutlined style={{ color: '#1890ff' }} />
             </Tooltip>
           }

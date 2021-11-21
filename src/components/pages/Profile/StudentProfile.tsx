@@ -49,9 +49,6 @@ const ProfilePage = styled.div`
 
 const Profile = () => {
 
-
-
-
   return (
     <ProfileContainer>
       <ProfilePage>
