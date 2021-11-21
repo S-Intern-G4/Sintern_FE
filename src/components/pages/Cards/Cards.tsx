@@ -23,6 +23,7 @@ const Cards = () => {
     useEffect(() => {
         ApiService.get<Domain[]>(ApiEndpoints.domains)
             .then((data) => {
+                console.log(data.data)
                 setDomains(data.data);
             });
 
@@ -37,6 +38,7 @@ const Cards = () => {
                             <CategoryCard
                                 DomainName={value.domainType}
                                 Description={value.description}
+                                DomainImage={value.domainImage}
                             />
                         </Link>
                     ))}
