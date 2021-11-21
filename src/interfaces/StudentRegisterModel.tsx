@@ -4,7 +4,7 @@ export interface StudentRegisterModel {
   firstName: string
   lastName: string
   dateOfBirth: Date
-  phone: string
+  phoneNumber: string
   university: string
   faculty: string
   specialization: string

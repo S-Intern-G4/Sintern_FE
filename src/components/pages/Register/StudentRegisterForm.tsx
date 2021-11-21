@@ -63,7 +63,7 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
     lastName: '',
     email: '',
     dateOfBirth: null,
-    phone: '',
+    phoneNumber: '',
     password: '',
     confirmPassword: ''
   });
@@ -179,7 +179,7 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
 
             <CustomFormItem
               label='Phone number'
-              name='phone'
+              name='phoneNumber'
               rules={[
                 { required: true, message: 'Phone number is required' },
                 { pattern: /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/g, message: 'Invalid phone number' }

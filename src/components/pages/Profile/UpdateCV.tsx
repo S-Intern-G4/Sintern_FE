@@ -29,14 +29,14 @@ const CloseIcon = styled(CloseOutlined)`
 `;
 
 const UpdateCV = () => {
-  const { token } = useContext(UserContext);
+  const { id } = useContext(UserContext);
   const [cv, setCV] = useState(null);
   const [state, setState] = useState({
     file: null
   });
 
   const getCV = () => {
-    ApiService.getFile(ApiEndpoints.cv(token))
+    ApiService.getFile(ApiEndpoints.cv(id))
       .then((response) => {
         setCV(URL.createObjectURL(response.data));
       });
@@ -53,7 +53,7 @@ const UpdateCV = () => {
       const url = ApiEndpoints.uploadCv;
       const formData = new FormData();
       formData.append('file', value);
-      formData.append('id', token);
+      formData.append('id', id);
       apiService.uploadFile(url, formData);
     } else {
       // handle remove

@@ -1,5 +1,7 @@
 export const ApiEndpoints = {
   user: (token: string) => `/user/${token}`,
+  students: (id: string) => `/students/${id}`,
+  companies: (id: string) => `/companies/${id}`,
   companyRegister: '/companies/register',
   studentRegister: '/students/register',
   login: '/login',

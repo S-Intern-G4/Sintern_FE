@@ -20,10 +20,10 @@ export const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (token) {
-      apiService.get(ApiEndpoints.user(token))
-        .then(({ data: any }) => {
+      apiService.get<any>(ApiEndpoints.user(token))
+        .then(({ data }) => {
+          setId(data.id);
           setType(data.type);
-          setId(data.id)
         })
         .catch(() => {
           localStorage.removeItem('token');
