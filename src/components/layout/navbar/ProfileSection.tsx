@@ -1,9 +1,9 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import { Dropdown, Menu } from 'antd';
 import { useHistory } from 'react-router-dom';
-import {UserContext} from "../../context/UserContext";
+import { UserContext } from '../../context/UserContext';
 
 const Profile = styled.div`
   height: 50px;
@@ -30,12 +30,12 @@ const ProfileSection = () => {
   const history = useHistory();
   const { setToken } = useContext(UserContext);
 
-    const handleButtonLogout = () => {
-        localStorage.removeItem('token');
-        setToken(null);
-    }
+  const handleButtonLogout = () => {
+    localStorage.removeItem('token');
+    setToken(null);
+  };
 
-    const menu = (
+  const menu = (
     <Menu onClick={() => history.push('/profile')}>
       <Menu.Item onClick={() => history.push('/profile')}>
         Profile

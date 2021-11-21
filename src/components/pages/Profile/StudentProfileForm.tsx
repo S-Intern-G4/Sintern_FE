@@ -42,8 +42,7 @@ const StudentProfileForm = () => {
   const history = useHistory();
 
   const handleUpdateSubmit = values => {
-     // TODO
-    console.log('submit');
+     // TODO: update student endpoint
   };
 
   return (

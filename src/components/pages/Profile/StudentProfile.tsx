@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import UpdateCV from './UpdateCV';
 import StudentProfileForm from './StudentProfileForm';
 
+
+
 const ProfileContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -46,6 +48,10 @@ const ProfilePage = styled.div`
 `;
 
 const Profile = () => {
+
+
+
+
   return (
     <ProfileContainer>
       <ProfilePage>

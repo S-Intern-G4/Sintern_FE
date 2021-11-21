@@ -43,6 +43,9 @@ const MyImage = styled(Image)`
 `;
 
 const FeedComponent = (props) => {
+
+    console.log(props.companyLogo);
+
     return (
         <CardFeed >
             <MyImage
