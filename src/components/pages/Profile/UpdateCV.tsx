@@ -6,7 +6,6 @@ import { CloseOutlined } from '@ant-design/icons';
 import ApiService from '../../../services/apiService';
 import { ApiEndpoints } from '../../../configs/api/endpoints';
 import { UserContext } from '../../context/UserContext';
-import apiService from '../../../services/apiService';
 
 const UploadCvContent = styled.div`
   display: flex;
@@ -54,7 +53,7 @@ const UpdateCV = () => {
       const formData = new FormData();
       formData.append('file', value);
       formData.append('id', id);
-      apiService.uploadFile(url, formData);
+      ApiService.uploadFile(url, formData);
     } else {
       // handle remove
     }
