@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import FileInput from '../../shared/FileInput';
 import { CloseOutlined } from '@ant-design/icons';
+
+import ApiService from '../../../services/apiService';
+import { ApiEndpoints } from '../../../configs/api/endpoints';
+import { UserContext } from '../../context/UserContext';
+import apiService from '../../../services/apiService';
 
 const UploadCvContent = styled.div`
   display: flex;
@@ -24,17 +29,32 @@ const CloseIcon = styled(CloseOutlined)`
 `;
 
 const UpdateCV = () => {
-
+  const { id } = useContext(UserContext);
   const [cv, setCV] = useState(null);
   const [state, setState] = useState({
     file: null
   });
 
+  const getCV = () => {
+    ApiService.getFile(ApiEndpoints.cv(id))
+      .then((response) => {
+        setCV(URL.createObjectURL(response.data));
+      });
+  };
+
+  useEffect(() => {
+    getCV();
+  }, []);
+
   const handleChange = (name, value) => {
     if (value) {
       setState({ ...state, file: value });
       setCV(URL.createObjectURL(value));
-      // handle upload
+      const url = ApiEndpoints.uploadCv;
+      const formData = new FormData();
+      formData.append('file', value);
+      formData.append('id', id);
+      apiService.uploadFile(url, formData);
     } else {
       // handle remove
     }
@@ -49,7 +69,11 @@ const UpdateCV = () => {
   return (
     <UploadCvContent>
       <h1>Upload CV</h1>
-      <CloseIcon onClick={handleRemove} />
+
+      {
+        cv &&
+        <CloseIcon onClick={handleRemove} />
+      }
 
       <FileInput
         name='file'

@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Grid, Fab, makeStyles } from '@material-ui/core';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import { Document, Page, pdfjs } from 'react-pdf';
+
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+// pdfjs.GlobalWorkerOptions.workerSrc = 'pdf.worker.min.js';
 
 const FileInput = (props) => {
   const [isPdf, setIsPdf] = useState(false);

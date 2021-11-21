@@ -17,8 +17,7 @@ const CompanyProfile = () => {
   const [form] = UnauthenticatedForm.useForm();
 
   const handleUpdateSubmit = values => {
-    // TODO
-    console.log('submit');
+    // TODO: update company endpoint
   };
 
   return (

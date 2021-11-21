@@ -43,6 +43,7 @@ const MyImage = styled(Image)`
 `;
 
 const FeedComponent = (props) => {
+
     return (
         <CardFeed >
             <MyImage
