@@ -20,7 +20,7 @@ const ApplyModal = (props) => {
 
     const { id } = useContext(UserContext);
 
-    const {handleOk} = props;
+    const {handleOk, openPositionName} = props;
 
     const [form] = Form.useForm();
     const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false);
@@ -45,6 +45,9 @@ const ApplyModal = (props) => {
 
     return (
         <Form {...layout} form={form} name="control-hooks" onFinish={handleSubmit}>
+            <label>
+                Apply for {openPositionName}
+            </label>
             <Form.Item
                 name="description"
                 label="Description"

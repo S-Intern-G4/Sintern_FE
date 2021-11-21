@@ -82,7 +82,7 @@ const FeedComponent = (props) => {
                         onCancel={ handleCancel }
                         footer={null}
                         >
-                    <ApplyModal openInternPositionID={props.id} handleOk={handleOk} />
+                    <ApplyModal openInternPositionID={props.id} openPositionName={props.name} handleOk={handleOk} />
                 </Modal>
             </TextCard>
         </CardFeed>
