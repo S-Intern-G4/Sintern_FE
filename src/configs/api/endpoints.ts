@@ -3,6 +3,6 @@ export const ApiEndpoints = {
   studentRegister: '/students/register',
   login: '/login',
   domains: '/domains',
-  openPositions: '/open-positions/domain'
-
+  openPositions: '/open-positions/domain',
+  applyOpenPosition: '/applications'
 };

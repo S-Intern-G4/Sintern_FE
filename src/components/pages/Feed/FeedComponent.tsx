@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Image } from 'antd';
+import { Image, Modal } from 'antd';
 import CustomButton from '../../shared/CustomButton';
+import ApplyModal from './ApplyModal';
 
 const CardFeed = styled.div`
   width: 100%;
@@ -49,6 +50,20 @@ const ApplyButton = styled(CustomButton)`
 
 const FeedComponent = (props) => {
 
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const showApplyModal = () =>{
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
     return (
         <CardFeed >
             <MyImage
@@ -61,7 +76,14 @@ const FeedComponent = (props) => {
                 <Description><strong>Description:</strong> {props.description}</Description>
                 <Department><strong>Department:</strong> {props.department}</Department>
                 <NumberOfMaxStudents><strong>Maximum number of students:</strong> {props.numberOfMaxStudents}</NumberOfMaxStudents>
-                <ApplyButton onClick={props.showApplyModal}>Apply</ApplyButton>
+                <ApplyButton onClick={showApplyModal}>Apply</ApplyButton>
+                <Modal title={ props.companyName }
+                        visible={ isModalVisible }
+                        onCancel={ handleCancel }
+                        footer={null}
+                        >
+                    <ApplyModal openInternPositionID={props.id} handleOk={handleOk} />
+                </Modal>
             </TextCard>
         </CardFeed>
     );
