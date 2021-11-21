@@ -1,36 +1,74 @@
-import { Modal } from 'antd';
-import React, { useState } from 'react';
+import { Form, Input, Select } from "antd";
+import React, { useState } from "react";
+import { ApiEndpoints } from "../../../configs/api/endpoints";
+import CustomButton from "../../shared/CustomButton";
+import ApiService from '../../../services/apiService';
+import { UserContext } from "../../context/UserContext";
+import { Application } from "../../../interfaces/application/Application";
+
+const { Option } = Select;
+
+const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+};
+const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
+};
 
 const ApplyModal = (props) => {
 
-    const [confirmLoading, setConfirmLoading] = useState(false);
-    const [modalText, setModalText] = useState('Content of the modal');
+    // const { id } = useContext(UserContext);
 
-    const handleOk = () => {
-        setModalText('The modal will be closed after two seconds');
-        setConfirmLoading(true);
-        setTimeout(() => {
-            props.setApplyModalVisibility(false);
-            setConfirmLoading(false);
-        }, 2000);
-    };
+    const {handleOk} = props;
 
-    const handleCancel = () => {
-        console.log('Clicked cancel button');
-        props.setApplyModalVisibility(false);
+    const [form] = Form.useForm();
+    const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false);
+    const [apiError, setApiError] = useState(null);
+
+    const handleSubmit = (values: any) => {
+        setIsSubmitButtonDisabled(true);
+        ApiService.post<any, Application>(ApiEndpoints.applyOpenPosition, {
+            studentID: "2",
+            openInternPositionID: props.openInternPositionID,
+            description: values.description
+        })
+            .then(() => {
+                handleOk();
+                setIsSubmitButtonDisabled(false);
+            })
+            .catch((error) => {
+                setApiError(error.response.data.errorMessage);
+                setIsSubmitButtonDisabled(false);
+            });
     };
 
     return (
-        <Modal
-            title="Title"
-            visible={props.applyModalVisibility}
-            // onOk={handleOk}
-            confirmLoading={confirmLoading}
-            // onCancel={handleCancel}
-        >
-            <p>{modalText}</p>
-        </Modal>
+        <Form {...layout} form={form} name="control-hooks" onFinish={handleSubmit}>
+            <Form.Item
+                name="description"
+                label="Description"
+                rules={[{ required: true, max: 600 }]}
+            >
+                <Input.TextArea />
+            </Form.Item>
+            {/* <Form.Item name="cv" label="CV" rules={[{ required: true }]}>
+                <Select placeholder="Select a CV" allowClear>
+                    <Option value="male">male</Option>
+                    <Option value="female">female</Option>
+                    <Option value="other">other</Option>
+                </Select>
+            </Form.Item> */}
+            <Form.Item {...tailLayout}>
+                <CustomButton type="primary" htmlType="submit" disabled={isSubmitButtonDisabled}>
+                    Submit
+                </CustomButton>
+            </Form.Item>
+            { apiError && <label>
+                {apiError}
+            </label>}
+        </Form>
     );
 };
 
-export default Modal ;
+export default ApplyModal;
