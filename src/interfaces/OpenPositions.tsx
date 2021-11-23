@@ -7,5 +7,5 @@ export interface OpenPosition{
     companyName:string;
     companyDomain :string;
     companyAddress:string;
-
+    companyLogo:string;
 }

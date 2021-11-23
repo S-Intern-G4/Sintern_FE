@@ -8,6 +8,7 @@ import UnauthenticatedRoute from './shared/routes/UnauthenticatedRoute';
 import AuthenticatedRoute from './shared/routes/AuthenticatedRoute';
 import Register from './pages/Register/Register';
 import Feed from './pages/Feed/Feed';
+import Profile from './pages/Profile/Profile';
 
 
 const App = () => (
@@ -18,6 +19,7 @@ const App = () => (
         <UnauthenticatedRoute path='/login' component={Login} exact />
         <AuthenticatedRoute path='/' component={Cards} exact />
         <AuthenticatedRoute path='/feed/:domain' component={Feed} exact />
+        <AuthenticatedRoute path='/profile' component={Profile} exact />
         <Redirect to='/' />
       </Switch>
     </Router>

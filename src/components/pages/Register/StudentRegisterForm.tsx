@@ -58,12 +58,12 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
   const history = useHistory();
   const [secondForm] = UnauthenticatedForm.useForm();
 
-  const [fisrtPageValues, setFirstPageValues] = useState({
+  const [firstPageValues, setFirstPageValues] = useState({
     firstName: '',
     lastName: '',
     email: '',
     dateOfBirth: null,
-    phone: '',
+    phoneNumber: '',
     password: '',
     confirmPassword: ''
   });
@@ -76,7 +76,7 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
   const handleRegisterSubmit = (values) => {
     setIsRegisterButtonDisabled(true);
 
-    const requestValues = { ...fisrtPageValues, ...values };
+    const requestValues = { ...firstPageValues, ...values };
     requestValues.university = requestValues.university[0];
     requestValues.faculty = requestValues.faculty[0];
     requestValues.specialization = requestValues.specialization[0];
@@ -97,7 +97,7 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
         !showEducationDetails &&
         <UnauthenticatedForm
           onFinish={handleNext}
-          initialValues={fisrtPageValues}
+          initialValues={firstPageValues}
         >
 
           <ErrorHeader>
@@ -179,7 +179,7 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
 
             <CustomFormItem
               label='Phone number'
-              name='phone'
+              name='phoneNumber'
               rules={[
                 { required: true, message: 'Phone number is required' },
                 { pattern: /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/g, message: 'Invalid phone number' }

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Image } from 'antd';
+import { Image, Modal } from 'antd';
+import CustomButton from '../../shared/CustomButton';
+import ApplyModal from './ApplyModal';
 
 const CardFeed = styled.div`
   width: 100%;
-  margin: 10px;
+  margin: 10px 0px;
   background-color: #2193b0;
   color:black;
   border-radius: 8px;
@@ -42,12 +44,31 @@ const MyImage = styled(Image)`
     margin: 20px 0px 20px 0px;
 `;
 
+const ApplyButton = styled(CustomButton)`
+  align-self: flex-end;
+`;
+
 const FeedComponent = (props) => {
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const showApplyModal = () =>{
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
     return (
         <CardFeed >
             <MyImage
                 width={200}
-                src='https://gradschool.utk.edu/wp-content/uploads/sites/24/2016/07/JobIcon-300x300.png'
+                src={`data:image/jpeg;base64,${props.companyLogo}`}
             />
             <TextCard>
                 <CompanyName><strong>Company name:</strong> {props.companyName}</CompanyName>
@@ -55,6 +76,14 @@ const FeedComponent = (props) => {
                 <Description><strong>Description:</strong> {props.description}</Description>
                 <Department><strong>Department:</strong> {props.department}</Department>
                 <NumberOfMaxStudents><strong>Maximum number of students:</strong> {props.numberOfMaxStudents}</NumberOfMaxStudents>
+                <ApplyButton onClick={showApplyModal}>Apply</ApplyButton>
+                <Modal title={ props.companyName }
+                        visible={ isModalVisible }
+                        onCancel={ handleCancel }
+                        footer={null}
+                        >
+                    <ApplyModal openInternPositionID={props.id} openPositionName={props.name} handleOk={handleOk} />
+                </Modal>
             </TextCard>
         </CardFeed>
     );

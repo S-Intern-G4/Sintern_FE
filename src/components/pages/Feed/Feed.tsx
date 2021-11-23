@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import FeedContainer from './FeedContainer';
 import FeedComponent from './FeedComponent';
 import Navbar from '../../layout/navbar/Navbar';
@@ -10,9 +10,10 @@ import { useParams } from 'react-router-dom';
 
 
 const Feed = () => {
+
     const [openPositions, setOpenPositions] = useState<OpenPosition[]>([]);
     const { domain } = useParams();
-
+    
     useEffect(() => {
         ApiService.get<any>(ApiEndpoints.openPositions + '/' + domain)
             .then((data) => {
@@ -25,16 +26,19 @@ const Feed = () => {
             <Navbar />
             <FeedContainer>
                 {openPositions.map((value, key) => (
-                    <FeedComponent key={key}
+                    <FeedComponent
+                        companyLogo = {value.companyLogo}
+                        key={key}
                         name={value.name}
                         department={value.department}
                         companyName={value.companyName}
                         description={value.description}
                         numberOfMaxStudents={value.availablePositions}
-                    />
+                        id={value.id}
+                        >
+                    </FeedComponent>
                 ))}
             </FeedContainer>
-
         </Container>
     );
 };

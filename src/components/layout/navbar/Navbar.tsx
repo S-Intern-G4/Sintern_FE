@@ -5,7 +5,7 @@ import ProfileSection from './ProfileSection';
 
 const CustomNavbar = styled.div`
   height: 80px;
-  width: 100vw;
+  width: 100%;
   background: #00458B;
   display: flex;
   align-items: center;
@@ -15,9 +15,7 @@ const CustomNavbar = styled.div`
     color: #fff;
     margin: 5px 20px;
     font-size: 1.5rem;
-  }
-
-  
+  }  
 `;
 
 const Logo = styled.div`
@@ -46,12 +44,6 @@ const Navbar = () => {
           <Logo>
             <img src='/src/assets/images/logo.png' alt='logo' />
           </Logo>
-        </Link>
-        <Link to={'/login'}>
-          Login
-        </Link>
-        <Link to={'/register'}>
-          Register
         </Link>
       </Links>
 

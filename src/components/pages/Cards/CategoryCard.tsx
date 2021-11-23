@@ -4,6 +4,8 @@ import React from 'react';
 interface CategoryCardProps{
     DomainName: string;
     Description: string;
+    DomainImage: string;
+  
 }
 
 const CustomCard = styled.div`
@@ -35,11 +37,11 @@ const CardDescription = styled.div`
     } 
 `;
 
-const CategoryCard = ({ DomainName, Description } : CategoryCardProps) => {
+const CategoryCard = ({ DomainName, Description, DomainImage } : CategoryCardProps) => {
     return(
         <CustomCard>
             <CardImage>
-                {/* <img src={ImageSRC} alt="example"/> */}
+                <img src={`data:image/jpeg;base64,${DomainImage}`}></img>
             </CardImage>
 
             <CardDescription>
