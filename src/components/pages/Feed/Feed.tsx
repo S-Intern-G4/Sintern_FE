@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FeedContainer from './FeedContainer';
 import FeedComponent from './FeedComponent';
 import Navbar from '../../layout/navbar/Navbar';

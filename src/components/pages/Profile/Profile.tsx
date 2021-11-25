@@ -7,7 +7,7 @@ import { UserContext } from '../../context/UserContext';
 
 
 const Profile = () => {
-  const { type } = useContext(UserContext)
+  const { type } = useContext(UserContext);
 
   return (
     <Container>

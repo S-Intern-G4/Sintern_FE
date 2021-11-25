@@ -38,6 +38,8 @@ const UpdateCV = () => {
     ApiService.getFile(ApiEndpoints.cv(id))
       .then((response) => {
         setCV(URL.createObjectURL(response.data));
+      }).catch(() => {
+        setCV(null);
       });
   };
 

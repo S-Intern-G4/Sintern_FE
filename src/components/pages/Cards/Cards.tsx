@@ -23,7 +23,6 @@ const Cards = () => {
     useEffect(() => {
         ApiService.get<Domain[]>(ApiEndpoints.domains)
             .then((data) => {
-                console.log(data.data)
                 setDomains(data.data);
             });
 

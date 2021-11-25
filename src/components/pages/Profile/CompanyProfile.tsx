@@ -1,43 +1,58 @@
 import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
-import { Cascader, DatePicker, Input, Tooltip } from 'antd';
+import { Cascader, Input, Tooltip } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import CustomButton from '../../shared/CustomButton';
 import CustomFormItem from '../../shared/CustomFormItem';
 import UnauthenticatedForm from '../../shared/UnauthenticatedForm';
-import { useHistory } from 'react-router-dom';
 import ErrorHeader from '../../shared/ErrorHeader';
 import CustomForm from '../../shared/CustomForm';
-import { University } from '../../../enums/University';
-import { Faculty } from '../../../enums/Faculty';
-import { Specialization } from '../../../enums/Specialization';
 import ApiService from '../../../services/apiService';
 import { ApiEndpoints } from '../../../configs/api/endpoints';
 import { UserContext } from '../../context/UserContext';
-import moment from 'moment';
 import { Domain } from '../../../enums/Domain';
 import Container from '../../shared/Container';
+import { CompanyUpdateModel } from '../../../interfaces/company/CompanyUpdateModel';
 
 const CompanyProfileForm = () => {
   const { id } = useContext(UserContext);
   const [isUpdateButtonDisabled, setIsUpdateButtonDisabled] = useState(false);
   const [apiError, setApiError] = useState('');
+  const [successHeader, setSuccessHeader] = useState('');
   const [form] = UnauthenticatedForm.useForm();
 
   useEffect(() => {
     ApiService.get<any>(ApiEndpoints.companies(id))
       .then(({ data }) => {
-        console.log(data);
         form.setFieldsValue({
           name: data.name,
           address: data.address,
           domain: [data.domain.domainType]
         });
       });
-  }, [])
+  }, []);
+
 
   const handleUpdateSubmit = values => {
-    // TODO: update student endpoint
+    setIsUpdateButtonDisabled(true);
+    const requestValues = { ...values };
+    requestValues.id = id;
+    requestValues.domain = requestValues.domain[0];
+    ApiService.post<any, CompanyUpdateModel>(ApiEndpoints.updateCompany, requestValues)
+      .then(({ data }) => {
+        form.setFieldsValue({
+          name: data.name,
+          address: data.address,
+          domain: [data.domain.domainType]
+        });
+        setIsUpdateButtonDisabled(false);
+        setSuccessHeader('Successfully updated');
+      })
+      .catch((error) => {
+        setApiError(error.errorMessages);
+        setIsUpdateButtonDisabled(false);
+      });
+
   };
 
   return (
@@ -58,6 +73,10 @@ const CompanyProfileForm = () => {
         <ErrorHeader>
           <p>{apiError}</p>
         </ErrorHeader>
+
+        <SuccessHeader>
+          <p>{successHeader}</p>
+        </SuccessHeader>
 
         <CustomFormItem
           label='Company Name'
@@ -122,5 +141,11 @@ const CompanyContainer = styled(Container)`
 
   @media (max-width: 768px) {
     width: 95%
+  }
+`;
+
+const SuccessHeader = styled(ErrorHeader)`
+  p {
+    color: #009900;
   }
 `;

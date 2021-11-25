@@ -14,7 +14,7 @@ import ApiService from '../../../services/apiService';
 import { ApiEndpoints } from '../../../configs/api/endpoints';
 import ErrorHeader from '../../shared/ErrorHeader';
 import { useHistory } from 'react-router-dom';
-import { StudentRegisterModel } from '../../../interfaces/StudentRegisterModel';
+import { StudentRegisterModel } from '../../../interfaces/students/StudentRegisterModel';
 
 const NamesContainer = styled.div`
   width: 100%;
@@ -182,7 +182,7 @@ const StudentRegisterForm = ({ onBackClick }: StudentRegisterFormProps) => {
               name='phoneNumber'
               rules={[
                 { required: true, message: 'Phone number is required' },
-                { pattern: /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/g, message: 'Invalid phone number' }
+                { pattern: /^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$/g, message: 'Invalid phone number' }
               ]}
               hasFeedback
             >

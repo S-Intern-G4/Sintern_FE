@@ -5,7 +5,6 @@ import UpdateCV from './UpdateCV';
 import StudentProfileForm from './StudentProfileForm';
 
 
-
 const ProfileContainer = styled.div`
   display: flex;
   justify-content: center;
