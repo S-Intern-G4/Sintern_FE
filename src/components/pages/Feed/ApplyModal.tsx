@@ -1,26 +1,25 @@
-import { Form, Input, Select } from "antd";
-import React, { useContext, useState } from "react";
-import { ApiEndpoints } from "../../../configs/api/endpoints";
-import CustomButton from "../../shared/CustomButton";
+import { Form, Input } from 'antd';
+import React, { useContext, useState } from 'react';
+import { ApiEndpoints } from '../../../configs/api/endpoints';
+import CustomButton from '../../shared/CustomButton';
 import ApiService from '../../../services/apiService';
-import { UserContext } from "../../context/UserContext";
-import { Application } from "../../../interfaces/application/Application";
-
-const { Option } = Select;
+import { UserContext } from '../../context/UserContext';
+import { Application } from '../../../interfaces/application/Application';
 
 const layout = {
     labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+    wrapperCol: { span: 16 }
 };
+
 const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
+    wrapperCol: { offset: 8, span: 16 }
 };
 
 const ApplyModal = (props) => {
 
     const { id } = useContext(UserContext);
 
-    const {handleOk, openPositionName} = props;
+    const { handleOk, openPositionName } = props;
 
     const [form] = Form.useForm();
     const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false);
@@ -44,30 +43,23 @@ const ApplyModal = (props) => {
     };
 
     return (
-        <Form {...layout} form={form} name="control-hooks" onFinish={handleSubmit}>
+        <Form {...layout} form={form} name='control-hooks' onFinish={handleSubmit}>
             <label>
                 Apply for {openPositionName}
             </label>
             <Form.Item
-                name="description"
-                label="Description"
+                name='description'
+                label='Description'
                 rules={[{ required: true, max: 600 }]}
             >
                 <Input.TextArea />
             </Form.Item>
-            {/* <Form.Item name="cv" label="CV" rules={[{ required: true }]}>
-                <Select placeholder="Select a CV" allowClear>
-                    <Option value="male">male</Option>
-                    <Option value="female">female</Option>
-                    <Option value="other">other</Option>
-                </Select>
-            </Form.Item> */}
             <Form.Item {...tailLayout}>
-                <CustomButton type="primary" htmlType="submit" disabled={isSubmitButtonDisabled}>
+                <CustomButton type='primary' htmlType='submit' disabled={isSubmitButtonDisabled}>
                     Submit
                 </CustomButton>
             </Form.Item>
-            { apiError && <label>
+            {apiError && <label>
                 {apiError}
             </label>}
         </Form>

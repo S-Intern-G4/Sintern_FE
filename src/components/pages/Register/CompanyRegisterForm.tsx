@@ -10,9 +10,9 @@ import UnauthenticatedForm from '../../shared/UnauthenticatedForm';
 import { Domain } from '../../../enums/Domain';
 import ApiService from '../../../services/apiService';
 import { ApiEndpoints } from '../../../configs/api/endpoints';
-import { CompanyRegisterModel } from '../../../interfaces/CompanyRegisterModel';
 import { useHistory } from 'react-router-dom';
 import ErrorHeader from '../../shared/ErrorHeader';
+import { CompanyRegisterModel } from '../../../interfaces/company/CompanyRegisterModel';
 
 const ButtonsContainer = styled.div`
   width: 80%;

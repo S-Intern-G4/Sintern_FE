@@ -5,7 +5,6 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import CustomButton from '../../shared/CustomButton';
 import CustomFormItem from '../../shared/CustomFormItem';
 import UnauthenticatedForm from '../../shared/UnauthenticatedForm';
-import { useHistory } from 'react-router-dom';
 import ErrorHeader from '../../shared/ErrorHeader';
 import CustomForm from '../../shared/CustomForm';
 import { University } from '../../../enums/University';
@@ -15,6 +14,7 @@ import ApiService from '../../../services/apiService';
 import { ApiEndpoints } from '../../../configs/api/endpoints';
 import { UserContext } from '../../context/UserContext';
 import moment from 'moment';
+import { StudentUpdateModel } from '../../../interfaces/students/StudentUpdateModel';
 
 const NamesContainer = styled.div`
   width: 100%;
@@ -43,6 +43,7 @@ const StudentProfileForm = () => {
   const { id } = useContext(UserContext);
   const [isUpdateButtonDisabled, setIsUpdateButtonDisabled] = useState(false);
   const [apiError, setApiError] = useState('');
+  const [successHeader, setSuccessHeader] = useState('');
   const [form] = UnauthenticatedForm.useForm();
 
   useEffect(() => {
@@ -52,17 +53,42 @@ const StudentProfileForm = () => {
           firstName: data.firstName,
           lastName: data.lastName,
           phoneNumber: data.phoneNumber,
-          dateOfBirth:  moment(data.dateOfBirth),
+          dateOfBirth: moment(data.dateOfBirth),
           university: [data.educationDetails.university],
           faculty: [data.educationDetails.faculty],
           specialization: [data.educationDetails.specialization],
           yearOfStudy: data.educationDetails.yearOfStudy
         });
       });
-  }, [])
+  }, []);
 
   const handleUpdateSubmit = values => {
-    // TODO: update student endpoint
+    setIsUpdateButtonDisabled(true);
+    const requestValues = { ...values };
+    requestValues.id = id;
+    requestValues.university = requestValues.university[0];
+    requestValues.faculty = requestValues.faculty[0];
+    requestValues.specialization = requestValues.specialization[0];
+
+    ApiService.post<any, StudentUpdateModel>(ApiEndpoints.updateStudent, requestValues)
+      .then(({ data }) => {
+        form.setFieldsValue({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          phoneNumber: data.phoneNumber,
+          dateOfBirth: moment(data.dateOfBirth),
+          university: [data.educationDetails.university],
+          faculty: [data.educationDetails.faculty],
+          specialization: [data.educationDetails.specialization],
+          yearOfStudy: data.educationDetails.yearOfStudy
+        });
+        setIsUpdateButtonDisabled(false);
+        setSuccessHeader('Successfully updated');
+      })
+      .catch((error) => {
+        setApiError(error.errorMessages);
+        setIsUpdateButtonDisabled(false);
+      });
   };
 
   return (
@@ -82,6 +108,11 @@ const StudentProfileForm = () => {
       <ErrorHeader>
         <p>{apiError}</p>
       </ErrorHeader>
+
+      <SuccessHeader>
+        <p>{successHeader}</p>
+      </SuccessHeader>
+
       <NamesContainer>
         <CustomFormItem
           label='First Name'
@@ -138,7 +169,7 @@ const StudentProfileForm = () => {
         name='phoneNumber'
         rules={[
           { required: true, message: 'Phone number is required' },
-          { pattern: /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/g, message: 'Invalid phone number' }
+          { pattern: /^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$/g, message: 'Invalid phone number' }
         ]}
         hasFeedback
       >
@@ -207,3 +238,10 @@ const StudentProfileForm = () => {
 };
 
 export default StudentProfileForm;
+
+
+const SuccessHeader = styled(ErrorHeader)`
+  p {
+    color: #009900;
+  }
+`;

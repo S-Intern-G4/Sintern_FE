@@ -28,9 +28,9 @@ export const UserContextProvider = ({ children }) => {
         .catch(() => {
           localStorage.removeItem('token');
           setToken(null);
-        })
+        });
     }
-  }, [token])
+  }, [token]);
 
   const data = {
     token: token,
