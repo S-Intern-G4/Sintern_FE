@@ -9,6 +9,7 @@ import AuthenticatedRoute from './shared/routes/AuthenticatedRoute';
 import Register from './pages/Register/Register';
 import Feed from './pages/Feed/Feed';
 import Profile from './pages/Profile/Profile';
+import Quizz from './pages/Quizz/Quizz';
 
 
 const App = () => (
@@ -20,6 +21,7 @@ const App = () => (
         <AuthenticatedRoute path='/' component={Cards} exact />
         <AuthenticatedRoute path='/feed/:domain' component={Feed} exact />
         <AuthenticatedRoute path='/profile' component={Profile} exact />
+        <AuthenticatedRoute path='/quizz/:openInternPositionId' component={Quizz} exact />
         <Redirect to='/' />
       </Switch>
     </Router>

@@ -11,5 +11,6 @@ export const ApiEndpoints = {
   applyOpenPosition: '/applications',
   uploadCv: '/students/upload-cv',
   updateCompany: '/companies/update',
-  updateStudent: 'students/update'
+  updateStudent: 'students/update',
+  addQuizz: '/quizzes'
 };
