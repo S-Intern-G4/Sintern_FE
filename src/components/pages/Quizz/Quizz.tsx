@@ -108,7 +108,7 @@ const Quizz = () => {
     const onClicCreateQuizz = values => {
         setQuizz({
             quizzQuestion:questions,
-            openInternPositionID:Number.parseInt(openInternPositionId)
+            openInternPositionID:openInternPositionId
         });
 
         console.log(quizz);
