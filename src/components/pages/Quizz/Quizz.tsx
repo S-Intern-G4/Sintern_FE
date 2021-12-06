@@ -33,7 +33,6 @@ const QuizzContent = styled.div`
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   overflow-y: scroll;
-  border: blue solid 2px;
 `;
 
 const MyQuestion = styled.div`
@@ -77,13 +76,13 @@ const MyCustomFormItem=styled(CustomFormItem)`
 const Quizz = () => {
     const [form] = UnauthenticatedForm.useForm();
     const [questions] = useState<Question[]>([]);
-    const [quizz,setQuizz] = useState<QuizzInterface>();
     const [radioValue, setRadioValue] = useState(1);
     const [numberOfQuestions,setNumberOfQuestions] = useState(0);
     const [isCreateQuizzButtonDisabled,setIsCreateQuizzButtonDisabled] = useState(false);
     const [successHeader, setSuccessHeader] = useState('');
     const [apiError, setApiError] = useState('');
     const { openInternPositionId } = useParams();
+    const [valueRadio,setValueRadio] = useState(1);
 
     const radioOnClick = e => {
         setRadioValue(e.target.value);
@@ -91,7 +90,6 @@ const Quizz = () => {
 
     const addOneQuestion = values => {
         const requestValues = { ...values };
-
         setNumberOfQuestions(numberOfQuestions + 1);
 
         questions[questions.length] = {
@@ -102,26 +100,20 @@ const Quizz = () => {
             'answer4':requestValues.answer4,
             'correctAnswerIndex':Number.parseInt(radioValue.toString())
         };
-
     };
 
     const onClicCreateQuizz = values => {
-        setQuizz({
+        const quizz ={
             quizzQuestion:questions,
             openInternPositionID:openInternPositionId
-        });
-
-        console.log(quizz);
-        console.log(radioValue)
+        };
         ApiService.post<any,QuizzInterface>(ApiEndpoints.addQuizz,quizz)
             .then(({ data })=>{
                 setIsCreateQuizzButtonDisabled(true);
-                setSuccessHeader('Successfully updated');
-                console.log(quizz);
+                setSuccessHeader('Successfully added');
             }).catch((error)=>{
             setApiError(error.errorMessages);
             setIsCreateQuizzButtonDisabled(false);
-            console.log(quizz);
         });
     };
 
@@ -131,15 +123,19 @@ const Quizz = () => {
                 <h1>Create a Quizz</h1>
                 <CustomForm name='basic'
                             form={form}
-                            onFinish={addOneQuestion}
+                            onFinish={(value)=>{
+                                addOneQuestion(value);
+                                form.resetFields();
+                            }}
                             initialValues={{
                                 question:'',
                                 answer1:'',
                                 answer2:'',
                                 answer3:'',
-                                answer4:''
+                                answer4:'',
                             }
                             }
+
                 >
                     <SuccessHeader>
                         <p>{successHeader}</p>
@@ -168,7 +164,7 @@ const Quizz = () => {
                         </MyCustomFormItem>
                     </MyQuestion>
 
-                    <MyRadioGroup name='radioGroup' >
+                    <MyRadioGroup name='radioGroup'  defaultValue={valueRadio} >
                         <MyAnswer>
                             <Radio value={1} onClick={radioOnClick}/>
                             <MyCustomFormItem
