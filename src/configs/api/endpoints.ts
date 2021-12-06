@@ -6,6 +6,7 @@ export const ApiEndpoints = {
   studentRegister: '/students/register',
   login: '/login',
   domains: '/domains',
+  positions: (id: string) => `open-positions/company/${id}`,
   openPositions: '/open-positions/domain',
   cv: (id: string) => `/students/${id}/cv`,
   applyOpenPosition: '/applications',

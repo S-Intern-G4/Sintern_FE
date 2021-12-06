@@ -1,6 +1,5 @@
 export interface DomainsResponseModel{
     domain: Domain[]
-
 }
 
 export interface Domain{
