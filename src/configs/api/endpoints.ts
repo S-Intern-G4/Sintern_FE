@@ -9,6 +9,12 @@ export const ApiEndpoints = {
   openPositions: "/open-positions/domain",
   positions: (id: string) => `open-positions/company/${id}`,
   cv: (id: string) => `/students/${id}/cv`,
+  applyOpenPosition: '/applications',
+  uploadCv: '/students/upload-cv',
+  updateCompany: '/companies/update',
+  updateStudent: 'students/update',
+  addQuizz: '/quizzes'
+};
   applyOpenPosition: "/applications",
   uploadCv: "/students/upload-cv",
   updateCompany: "/companies/update",
