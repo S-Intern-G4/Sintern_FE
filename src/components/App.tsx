@@ -9,6 +9,7 @@ import AuthenticatedRoute from './shared/routes/AuthenticatedRoute';
 import Register from './pages/Register/Register';
 import Feed from './pages/Feed/Feed';
 import Profile from './pages/Profile/Profile';
+import OpenPositionFeed from './pages/Appliers/OpenPositionFeed';
 import Positions from './pages/Positions/Positions';
 
 const App = () => (
@@ -20,6 +21,7 @@ const App = () => (
         <AuthenticatedRoute path='/' component={Cards} exact />
         <AuthenticatedRoute path='/feed/:domain' component={Feed} exact />
         <AuthenticatedRoute path='/profile' component={Profile} exact />
+        <AuthenticatedRoute path='/appliers/' component={OpenPositionFeed} exact />
         <AuthenticatedRoute path='/positions' component={Positions} exact />
         <Redirect to='/' />
       </Switch>
