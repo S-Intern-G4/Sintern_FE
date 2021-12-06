@@ -14,7 +14,7 @@ const OpenPositionFeed = (props) => {
   const { openPositionId } = props;
 
   useEffect(() => {
-    ApiService.get<any>(ApiEndpoints.studentsAppliers(openPositionId)).then(
+    ApiService.get<any>(ApiEndpoints.studentsAppliers("4cbcf0d2-3ede-11ec-9bbc-0242ac130002")).then(
       (data) => {
         setStudentsAppliers(data.data);
       }

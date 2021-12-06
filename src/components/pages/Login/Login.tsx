@@ -32,6 +32,7 @@ const Login = () => {
   const { setToken } = useContext(UserContext);
   const [apiError, setApiError] = useState('');
   const history = useHistory();
+  const { type } = useContext(UserContext);
 
   const loginSubmit = (values: UserLoginModel) => {
     setIsLoginButtonDisabled(true);
@@ -39,7 +40,11 @@ const Login = () => {
       .then(({ data: { token } }) => {
         localStorage.setItem('token', token);
         setToken(token);
-        history.push('/');
+        if (type === 'student') {
+          history.push('/positions');
+        } else {
+          history.push('/');
+        }
       })
       .catch((error) => {
         setApiError(error.response.data.errorMessage);

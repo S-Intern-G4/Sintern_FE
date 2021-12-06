@@ -13,12 +13,7 @@ export const ApiEndpoints = {
   uploadCv: '/students/upload-cv',
   updateCompany: '/companies/update',
   updateStudent: 'students/update',
-  addQuizz: '/quizzes'
-};
-  applyOpenPosition: "/applications",
-  uploadCv: "/students/upload-cv",
-  updateCompany: "/companies/update",
-  updateStudent: "students/update",
+  addQuizz: '/quizzes',
   studentsAppliers: (openInternPositionID: string) =>
     `/applications/${openInternPositionID}`,
 };
