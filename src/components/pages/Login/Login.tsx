@@ -41,9 +41,9 @@ const Login = () => {
         localStorage.setItem('token', token);
         setToken(token);
         if (type === 'student') {
-          history.push('/positions');
-        } else {
           history.push('/');
+        } else {
+          history.push('/positions');
         }
       })
       .catch((error) => {

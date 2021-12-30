@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
-
-interface PositionCardProps{
-    Description: string;
-}
+import CustomButton from '../../shared/CustomButton';
+import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const CustomCard = styled.div`
@@ -35,16 +34,22 @@ const CardDescription = styled.div`
     } 
 `;
 
-const PositionCard = ({Description}: PositionCardProps) => {
+const PositionCard = (props) => {
+
     return(
         <CustomCard>
             <CardImage>
-                
             </CardImage>
 
             <CardDescription>
-                <p>{Description}</p>
+                <p>{props.Description}</p>
             </CardDescription>
+            <Link to={`/${props.OpenPositionId}/results`} key={props.OpenPositionId}>
+                <CustomButton >
+                    View results
+                </CustomButton>
+            </Link>
+
        
         </CustomCard> 
     );
