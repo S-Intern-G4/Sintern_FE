@@ -12,6 +12,7 @@ import Profile from './pages/Profile/Profile';
 import Quizz from './pages/Quizz/Quizz';
 import OpenPositionFeed from './pages/Appliers/OpenPositionFeed';
 import Positions from './pages/Positions/Positions';
+import Results from './pages/Results/Results';
 
 const App = () => (
   <UserContextProvider>
@@ -25,6 +26,7 @@ const App = () => (
         <AuthenticatedRoute path='/quizz/:openInternPositionId' component={Quizz} exact />
         <AuthenticatedRoute path='/appliers/' component={OpenPositionFeed} exact />
         <AuthenticatedRoute path='/positions' component={Positions} exact />
+        <AuthenticatedRoute path='/:openPositionId/results' component={Results} exact />
         <Redirect to='/' />
       </Switch>
     </Router>

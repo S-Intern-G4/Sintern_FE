@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 
 interface PositionCardProps{
     Description: string;
     Id: string;
 }
+import CustomButton from '../../shared/CustomButton';
+import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const theme = {
     blue: {
@@ -69,15 +72,25 @@ const CardDescription = styled.div`
     text-transform: uppercase;
 `;
 
-const PositionCard = ({Description,Id}: PositionCardProps) => {
+// const PositionCard = ({Description,Id}: PositionCardProps) 
+
+const PositionCard = (props,{Description,Id}: PositionCardProps) => {
+
     return(
         <CustomCard>
             <Link to={`quizz/${Id}`} key={Id}>
                 <Button>Create Quizz</Button>
             </Link>
+
             <CardDescription>
-                <p>{Description}</p>
+                <p>{props.Description}</p>
             </CardDescription>
+            <Link to={`/${props.OpenPositionId}/results`} key={props.OpenPositionId}>
+                <CustomButton >
+                    View results
+                </CustomButton>
+            </Link>
+
        
         </CustomCard> 
     );
