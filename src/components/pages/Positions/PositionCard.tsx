@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import React from 'react';
-
+import CustomButton from '../../shared/CustomButton';
+import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface PositionCardProps{
     Description: string;
     Id: string;
 }
-import CustomButton from '../../shared/CustomButton';
-import { useHistory } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 const theme = {
     blue: {
@@ -18,7 +17,6 @@ const theme = {
   };
 
 const Button = styled.button`
-
   background-color: ${(props) => theme[props.theme].default};
   color: white;
   padding: 5px 15px;
@@ -37,9 +35,6 @@ const Button = styled.button`
     opacity: 0.7;
   }
 `;
-Button.defaultProps = {
-  theme: "blue"
-};
 
 const CustomCard = styled.div`
     border: 2px solid #DCDCDC;
@@ -47,23 +42,15 @@ const CustomCard = styled.div`
     flex-direction: column;
     border-radius: 8px;
 `;
-const CardImage = styled.div`
-    width: 100%;
-    height: 150px;
-    
-    img{
-        width: 100%;
-        height: 100%;
-        
-    } 
-`;
+
 const CardDescription = styled.div`
     width: 100%;
-    height: 150px;
+    height: 100px;
     text-align: center;
-    
+    padding-top: 50px;
+    font-size: 130%;
     h2{
-        padding-top: 10px;
+        padding-top: 50px;
     }
     p{
         padding-top: 0px;
@@ -72,26 +59,30 @@ const CardDescription = styled.div`
     text-transform: uppercase;
 `;
 
-// const PositionCard = ({Description,Id}: PositionCardProps) 
+const Buttons = styled.div`
+    display: flex; 
+    align-items: center; 
+    justify-content: space-evenly;
+    padding-bottom: 50px;
+`;
 
 const PositionCard = (props,{Description,Id}: PositionCardProps) => {
-
     return(
         <CustomCard>
-            <Link to={`quizz/${Id}`} key={Id}>
-                <Button>Create Quizz</Button>
-            </Link>
-
             <CardDescription>
                 <p>{props.Description}</p>
             </CardDescription>
-            <Link to={`/${props.OpenPositionId}/results`} key={props.OpenPositionId}>
-                <CustomButton >
-                    View results
-                </CustomButton>
-            </Link>
+            <Buttons>
+                <Link to={`/${props.OpenPositionId}/results`} key={props.OpenPositionId}>
+                    <CustomButton >
+                        View results
+                    </CustomButton>
+                </Link>
 
-       
+                <Link to={`quizz/${props.id}`} key={props.id}>
+                    <CustomButton>Create Quizz</CustomButton>
+                </Link>
+            </Buttons>
         </CustomCard> 
     );
 };
