@@ -42,6 +42,8 @@ const ProfileSection = () => {
           })
           .catch(() => {
             localStorage.removeItem('token');
+            localStorage.removeItem('id');
+            localStorage.removeItem('type');
             setToken(null);
           });
       } else {
@@ -58,6 +60,8 @@ const ProfileSection = () => {
     setId('');
     setType('');
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('type');
   };
 
   const menu = (

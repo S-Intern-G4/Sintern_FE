@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Image, Modal } from 'antd';
 import CustomButton from '../../shared/CustomButton';
 import ApplyModal from './ApplyModal';
+import { StudentApplier } from '../../../interfaces/application/StudentApplier';
+import apiService from '../../../services/apiService';
+import { ApiEndpoints } from '../../../configs/api/endpoints';
+import { UserContext } from '../../context/UserContext';
 
 const CardFeed = styled.div`
   width: 100%;
@@ -49,10 +53,11 @@ const ApplyButton = styled(CustomButton)`
 `;
 
 const FeedComponent = (props) => {
-
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [studentsAppliers, setStudentsAppliers] = useState<StudentApplier[]>([]);
+    const { token, type, id } = useContext(UserContext);
 
-    const showApplyModal = () =>{
+    const showApplyModal = () => {
         setIsModalVisible(true);
     };
 
@@ -63,6 +68,20 @@ const FeedComponent = (props) => {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
+
+    useEffect(() => {
+        
+        console.log('userEmail', props.userEmail);
+        console.log(studentsAppliers.find(applier => applier.email === props.userEmail) === undefined);
+        apiService.get<any>(ApiEndpoints.studentsAppliers(props.id)).then(
+            (data) => {
+                setStudentsAppliers(data.data);
+                data.data.forEach(applier => {
+                    console.log(applier);
+                });
+            }
+        );
+    }, []);
 
     return (
         <CardFeed >
@@ -76,12 +95,20 @@ const FeedComponent = (props) => {
                 <Description><strong>Description:</strong> {props.description}</Description>
                 <Department><strong>Department:</strong> {props.department}</Department>
                 <NumberOfMaxStudents><strong>Maximum number of students:</strong> {props.numberOfMaxStudents}</NumberOfMaxStudents>
-                <ApplyButton onClick={showApplyModal}>Apply</ApplyButton>
-                <Modal title={ props.companyName }
-                        visible={ isModalVisible }
-                        onCancel={ handleCancel }
-                        footer={null}
-                        >
+                {
+                    studentsAppliers.find(applier => applier.email === props.userEmail) === undefined && type === 'student' &&
+                        <ApplyButton onClick={showApplyModal}>Apply</ApplyButton>
+                }
+                {
+                    studentsAppliers.find(applier => applier.email === props.userEmail) !== undefined && type === 'student' &&
+                        <ApplyButton onClick={showApplyModal}>Take test</ApplyButton>
+                }
+                
+                <Modal title={props.companyName}
+                    visible={isModalVisible}
+                    onCancel={handleCancel}
+                    footer={null}
+                >
                     <ApplyModal openInternPositionID={props.id} openPositionName={props.name} handleOk={handleOk} />
                 </Modal>
             </TextCard>

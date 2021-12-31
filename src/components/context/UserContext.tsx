@@ -15,18 +15,22 @@ export const UserContext = createContext<UserContextModel>({ token: '', setToken
 
 export const UserContextProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const [id, setId] = useState(null);
-  const [type, setType] = useState(null);
+  const [id, setId] = useState(localStorage.getItem('id'));
+  const [type, setType] = useState(localStorage.getItem('type'));
 
   useEffect(() => {
     if (token) {
       apiService.get<any>(ApiEndpoints.user(token))
         .then(({ data }) => {
+          localStorage.setItem('id', data.id);
+          localStorage.setItem('type', data.type);
           setId(data.id);
           setType(data.type);
         })
         .catch(() => {
           localStorage.removeItem('token');
+          localStorage.removeItem('id');
+          localStorage.removeItem('type');
           setToken(null);
         });
     }
