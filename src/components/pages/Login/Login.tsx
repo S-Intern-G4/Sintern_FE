@@ -15,7 +15,6 @@ import { UserContext } from '../../context/UserContext';
 import { UserLoginModel } from '../../../interfaces/user/UserLoginModel';
 import { UserInfo } from '../../../interfaces/user/UserInfo';
 import ErrorHeader from '../../shared/ErrorHeader';
-import { useHistory } from 'react-router-dom';
 
 const Logo = styled.div`
   width: 200px;
@@ -31,8 +30,6 @@ const Login = () => {
   const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
   const { setToken } = useContext(UserContext);
   const [apiError, setApiError] = useState('');
-  const history = useHistory();
-  const { type } = useContext(UserContext);
 
   const loginSubmit = (values: UserLoginModel) => {
     setIsLoginButtonDisabled(true);
@@ -40,11 +37,6 @@ const Login = () => {
       .then(({ data: { token } }) => {
         localStorage.setItem('token', token);
         setToken(token);
-        if (type === 'student') {
-          history.push('/');
-        } else {
-          history.push('/positions');
-        }
       })
       .catch((error) => {
         setApiError(error.response.data.errorMessage);

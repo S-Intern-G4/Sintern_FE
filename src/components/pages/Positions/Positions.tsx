@@ -20,16 +20,16 @@ const CardsContainer = styled.div`
 
 const Positions = () => {
     const [domains, setDomains] = useState([] as any[]);
-    const user = useContext(UserContext);
+    const { id } = useContext(UserContext);
 
     useEffect(() => {
-        if(user.id){
-            ApiService.get<any>(ApiEndpoints.positions(user.id))
+        if(id){
+            ApiService.get<any>(ApiEndpoints.positions(id))
             .then((data) => {
                 setDomains(data.data);
             });
         }
-    }, [user]);
+    }, [id]);
     
     if (domains) {
         return (

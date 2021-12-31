@@ -48,6 +48,6 @@ const ResultsCard = (props)=>{
             </TextCard>
         </ResultCardFeed>
     );
-}
+};
 
 export default ResultsCard;

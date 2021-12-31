@@ -1,40 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import CustomButton from '../../shared/CustomButton';
-import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
-interface PositionCardProps{
-    Description: string;
-    Id: string;
-}
-
-const theme = {
-    blue: {
-      default: "#00458B;",
-      hover: "#107d9e"
-    }
-  };
-
-const Button = styled.button`
-  background-color: ${(props) => theme[props.theme].default};
-  color: white;
-  padding: 5px 15px;
-  border-radius: 5px;
-  outline: 0;
-  text-transform: uppercase;
-  margin: 10px 0px;
-  cursor: pointer;
-  box-shadow: 0px 2px 2px lightgray;
-  transition: ease background-color 250ms;
-  &:hover {
-    background-color: ${(props) => theme[props.theme].hover};
-  }
-  &:disabled {
-    cursor: default;
-    opacity: 0.7;
-  }
-`;
 
 const CustomCard = styled.div`
     border: 2px solid #DCDCDC;
@@ -66,8 +33,8 @@ const Buttons = styled.div`
     padding-bottom: 50px;
 `;
 
-const PositionCard = (props,{Description,Id}: PositionCardProps) => {
-    return(
+const PositionCard = (props) => {
+    return (
         <CustomCard>
             <CardDescription>
                 <p>{props.Description}</p>
@@ -79,11 +46,11 @@ const PositionCard = (props,{Description,Id}: PositionCardProps) => {
                     </CustomButton>
                 </Link>
 
-                <Link to={`quizz/${props.id}`} key={props.id}>
+                <Link to={`quizz/${props.OpenPositionId}`} key={props.OpenPositionId}>
                     <CustomButton>Create Quizz</CustomButton>
                 </Link>
             </Buttons>
-        </CustomCard> 
+        </CustomCard>
     );
 };
 export default PositionCard;

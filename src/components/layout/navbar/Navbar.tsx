@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import ProfileSection from './ProfileSection';
+import { UserContext } from '../../context/UserContext';
 
 const CustomNavbar = styled.div`
   height: 80px;
@@ -36,6 +37,7 @@ const Links = styled.div`
 `;
 
 const Navbar = () => {
+  const { type } = useContext(UserContext);
 
   return (
     <CustomNavbar>
@@ -45,6 +47,11 @@ const Navbar = () => {
             <img src='/src/assets/images/logo.png' alt='logo' />
           </Logo>
         </Link>
+
+        {
+          type === 'company' &&
+            <Link to={'/positions'}>Open positions</Link>
+        }
       </Links>
 
       <ProfileSection />
