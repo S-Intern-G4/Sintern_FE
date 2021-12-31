@@ -15,6 +15,10 @@ export const ApiEndpoints = {
   updateStudent: 'students/update',
   addQuizz: '/quizzes',
   studentsAppliers: (openInternPositionID: string) =>
-    `/applications/${openInternPositionID}`
+<<<<<<< HEAD
+    `/applications/${openInternPositionID}`,
   getTestResults: (openPositionId) => `/open-positions/${openPositionId}/test-results`
+=======
+    `/applications/${openInternPositionID}`
+>>>>>>> fix-appliers-view
 };

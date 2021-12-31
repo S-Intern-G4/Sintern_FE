@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { Document } from "react-pdf";
+import React from 'react';
+import styled from 'styled-components';
+import { Document } from 'react-pdf';
 
 const CardFeed = styled.div`
   width: 100%;
@@ -73,11 +73,11 @@ const OpenPositionFeedComponent = (props) => {
           <strong>Faculty:</strong> {studentApplier.educationDetails.faculty}
         </Faculty>
         <Specialization>
-          <strong>Specialization:</strong>{" "}
+          <strong>Specialization:</strong>{' '}
           {studentApplier.educationDetails.specialization}
         </Specialization>
         <YearOfStudy>
-          <strong>Year Of Study:</strong>{" "}
+          <strong>Year Of Study:</strong>{' '}
           {studentApplier.educationDetails.yearOfStudy}
         </YearOfStudy>
         <PhoneNumber>

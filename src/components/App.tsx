@@ -24,7 +24,7 @@ const App = () => (
         <AuthenticatedRoute path='/feed/:domain' component={Feed} exact />
         <AuthenticatedRoute path='/profile' component={Profile} exact />
         <AuthenticatedRoute path='/quizz/:openInternPositionId' component={Quizz} exact />
-        <AuthenticatedRoute path='/appliers/' component={OpenPositionFeed} exact />
+        <AuthenticatedRoute path='/appliers/:openPositionId' component={OpenPositionFeed} exact />
         <AuthenticatedRoute path='/positions' component={Positions} exact />
         <AuthenticatedRoute path='/:openPositionId/results' component={Results} exact />
         <Redirect to='/' />

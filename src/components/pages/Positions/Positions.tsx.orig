@@ -38,11 +38,18 @@ const Positions = () => {
                 
                 <CardsContainer>
                     {domains.map((value) => (
+<<<<<<< HEAD
+                        <PositionCard key={value.department}
+                                      Description={value.department}
+                                      OpenPositionId={value.id}/>
+
+=======
                         <Link to={`appliers/${value.id}`} key={value.department}>
                             <PositionCard key={value.department}
                                 Description={value.department}
                             />
                         </Link>
+>>>>>>> fix-appliers-view
                     ))}
                 </CardsContainer>
             </Container>
