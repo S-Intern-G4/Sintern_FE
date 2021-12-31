@@ -15,6 +15,5 @@ export const ApiEndpoints = {
   updateStudent: 'students/update',
   addQuizz: '/quizzes',
   studentsAppliers: (openInternPositionID: string) =>
-    `/applications/${openInternPositionID}`
   getTestResults: (openPositionId) => `/open-positions/${openPositionId}/test-results`
 };
