@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import { Dropdown, Menu } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
+import { ApiEndpoints } from '../../../configs/api/endpoints';
+import apiService from '../../../services/apiService';
 
 const Profile = styled.div`
   height: 50px;
@@ -28,11 +30,34 @@ const CustomUserIcon = styled(UserOutlined)`
 
 const ProfileSection = () => {
   const history = useHistory();
-  const { setToken } = useContext(UserContext);
+  const [name, setName] = useState('');
+  const { setToken, setId, setType, id, type } = useContext(UserContext);
+
+  useEffect(() => {
+    if (id) {
+      if (type === 'student') {
+        apiService.get<any>(ApiEndpoints.students(id))
+          .then(({ data }) => {
+            setName(`${data.firstName} ${data.lastName}`);
+          })
+          .catch(() => {
+            localStorage.removeItem('token');
+            setToken(null);
+          });
+      } else {
+        apiService.get<any>(ApiEndpoints.companies(id))
+          .then(({ data }) => {
+            setName(data.name);
+          });
+      }
+    }
+  }, [id]);
 
   const handleButtonLogout = () => {
+    setToken('');
+    setId('');
+    setType('');
     localStorage.removeItem('token');
-    setToken(null);
   };
 
   const menu = (
@@ -53,7 +78,7 @@ const ProfileSection = () => {
       <a className='ant-dropdown-link' onClick={e => e.preventDefault()}>
         <Profile>
           <CustomUserIcon />
-          <p>Nume Prenume</p>
+          <p>{name}</p>
           <DownOutlined style={{ marginLeft: '3px' }} />
         </Profile>
       </a>

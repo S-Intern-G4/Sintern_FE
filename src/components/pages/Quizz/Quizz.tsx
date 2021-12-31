@@ -82,7 +82,6 @@ const Quizz = () => {
     const [successHeader, setSuccessHeader] = useState('');
     const [apiError, setApiError] = useState('');
     const { openInternPositionId } = useParams();
-    const [valueRadio,setValueRadio] = useState(1);
 
     const radioOnClick = e => {
         setRadioValue(e.target.value);
@@ -102,13 +101,13 @@ const Quizz = () => {
         };
     };
 
-    const onClicCreateQuizz = values => {
+    const onClicCreateQuizz = () => {
         const quizz ={
             quizzQuestion:questions,
             openInternPositionID:openInternPositionId
         };
-        ApiService.post<any,QuizzInterface>(ApiEndpoints.addQuizz,quizz)
-            .then(({ data })=>{
+        ApiService.post<any,QuizzInterface>(ApiEndpoints.addQuizz, quizz)
+            .then(()=>{
                 setIsCreateQuizzButtonDisabled(true);
                 setSuccessHeader('Successfully added');
             }).catch((error)=>{
@@ -132,7 +131,7 @@ const Quizz = () => {
                                 answer1:'',
                                 answer2:'',
                                 answer3:'',
-                                answer4:'',
+                                answer4:''
                             }
                             }
 
@@ -164,7 +163,7 @@ const Quizz = () => {
                         </MyCustomFormItem>
                     </MyQuestion>
 
-                    <MyRadioGroup name='radioGroup'  defaultValue={valueRadio} >
+                    <MyRadioGroup name='radioGroup'  defaultValue={1} >
                         <MyAnswer>
                             <Radio value={1} onClick={radioOnClick}/>
                             <MyCustomFormItem

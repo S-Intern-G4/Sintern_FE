@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../../layout/navbar/Navbar';
 import Container from '../../shared/Container';
 import ResultsCard from './ResultsCard';
@@ -10,10 +10,10 @@ import FeedContainer from '../Feed/FeedContainer';
 import { Modal } from 'antd';
 import { useHistory } from 'react-router-dom';
 
-const Results = ()=> {
+const Results = () => {
     const { openPositionId } = useParams();
-    const [resultsTest,setResultsTests] = useState<ResultsInterface[]>([])
-    const [err,setErr] = useState(false);
+    const [resultsTest, setResultsTests] = useState<ResultsInterface[]>([]);
+    const [err, setErr] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const history = useHistory();
 
@@ -30,10 +30,10 @@ const Results = ()=> {
     const getTestResults = () => {
         ApiService.get<any>(ApiEndpoints.getTestResults(openPositionId))
             .then((response) => {
-                setResultsTests(response.data)
+                setResultsTests(response.data);
             }).catch(() => {
-                setErr(true)
-                setIsModalVisible(true)
+                setErr(true);
+                setIsModalVisible(true);
             });
     };
 
@@ -43,10 +43,10 @@ const Results = ()=> {
 
     return (
         <Container>
-            <Navbar/>
+            <Navbar />
             {err == false ?
                 <FeedContainer>
-                    {resultsTest.map((value,key )=>(
+                    {resultsTest.map((value, key) => (
                         <ResultsCard
                             key={key}
                             grade={value.grade}
@@ -64,9 +64,8 @@ const Results = ()=> {
                 </Modal>
             }
 
-
         </Container>
     );
-}
+};
 
 export default Results;
