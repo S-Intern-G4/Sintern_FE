@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { Image, Modal } from 'antd';
 import CustomButton from '../../shared/CustomButton';
 import ApplyModal from './ApplyModal';
-import { StudentApplier } from '../../../interfaces/application/StudentApplier';
 import apiService from '../../../services/apiService';
 import { ApiEndpoints } from '../../../configs/api/endpoints';
 import { UserContext } from '../../context/UserContext';
+import { Link } from 'react-router-dom';
 
 const CardFeed = styled.div`
   width: 100%;
@@ -28,34 +28,14 @@ const TextCard = styled.div`
   
 `;
 
-const Name = styled.div`
-    font-size: 20px;
-`;
-const Description = styled.div`
-    font-size: 20px;
-`;
-const Department = styled.div`
-    font-size: 20px;
-`;
-const NumberOfMaxStudents = styled.div`
-    font-size: 20px;
-`;
-const CompanyName = styled.div`
-    font-size: 20px;
-`;
-
-const MyImage = styled(Image)`
+const CustomImage = styled(Image)`
     margin: 20px 0px 20px 0px;
-`;
-
-const ApplyButton = styled(CustomButton)`
-  align-self: flex-end;
 `;
 
 const FeedComponent = (props) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [studentsAppliers, setStudentsAppliers] = useState<StudentApplier[]>([]);
-    const { token, type, id } = useContext(UserContext);
+    const { id, type } = useContext(UserContext);
+    const [applicationId, setApplicationId] = useState(false);
 
     const showApplyModal = () => {
         setIsModalVisible(true);
@@ -70,40 +50,41 @@ const FeedComponent = (props) => {
     };
 
     useEffect(() => {
-        
-        console.log('userEmail', props.userEmail);
-        console.log(studentsAppliers.find(applier => applier.email === props.userEmail) === undefined);
-        apiService.get<any>(ApiEndpoints.studentsAppliers(props.id)).then(
-            (data) => {
-                setStudentsAppliers(data.data);
-                data.data.forEach(applier => {
-                    console.log(applier);
-                });
-            }
-        );
+        apiService.post<any, any>(ApiEndpoints.applied, {
+            openInternPositionID: props.id,
+            studentID: id
+        })
+            .then(
+                (data) => {
+                    setApplicationId(data.data.applicationID);
+                }
+            );
     }, []);
 
     return (
         <CardFeed >
-            <MyImage
+            <CustomImage
                 width={200}
                 src={`data:image/jpeg;base64,${props.companyLogo}`}
             />
             <TextCard>
-                <CompanyName><strong>Company name:</strong> {props.companyName}</CompanyName>
-                <Name><strong>Open position name: </strong>{props.name}</Name>
-                <Description><strong>Description:</strong> {props.description}</Description>
-                <Department><strong>Department:</strong> {props.department}</Department>
-                <NumberOfMaxStudents><strong>Maximum number of students:</strong> {props.numberOfMaxStudents}</NumberOfMaxStudents>
+                <p><strong>Company name:</strong> {props.companyName}</p>
+                <p><strong>Open position name: </strong>{props.name}</p>
+                <p><strong>Description:</strong> {props.description}</p>
+                <p><strong>Department:</strong> {props.department}</p>
+                <p><strong>Maximum number of students:</strong> {props.numberOfMaxStudents}</p>
                 {
-                    studentsAppliers.find(applier => applier.email === props.userEmail) === undefined && type === 'student' &&
-                        <ApplyButton onClick={showApplyModal}>Apply</ApplyButton>
+                    applicationId === null && type === 'student' &&
+                    <CustomButton onClick={showApplyModal}>Apply</CustomButton>
                 }
                 {
-                    studentsAppliers.find(applier => applier.email === props.userEmail) !== undefined && type === 'student' &&
-                        <ApplyButton onClick={showApplyModal}>Take test</ApplyButton>
+                    applicationId &&
+                    <Link to={`/take-test/${props.id}/${applicationId}`}>
+                        <CustomButton>Take test</CustomButton>
+                    </Link>
+
                 }
-                
+
                 <Modal title={props.companyName}
                     visible={isModalVisible}
                     onCancel={handleCancel}
@@ -117,4 +98,3 @@ const FeedComponent = (props) => {
 };
 
 export default FeedComponent;
-

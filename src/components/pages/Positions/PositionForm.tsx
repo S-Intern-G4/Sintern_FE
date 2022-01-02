@@ -50,9 +50,8 @@ const PositionForm = () => {
             ApiEndpoints.createOpenPosition,
             requestValues
         )
-            .then(({ data }) => {
-                //console.log(requestValues);
-                //console.log(data);
+            .then(() => {
+
                 setIsAddButtonDisabled(false);
                 setSuccessHeader('Successfully added');
             })

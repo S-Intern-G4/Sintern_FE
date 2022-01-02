@@ -37,7 +37,7 @@ const Positions = () => {
                 <Navbar />
                 
                 <CardsContainer>
-                    {domains.map((value, index) => (
+                    {domains.map((value) => (
                         <Link to={`appliers/${value.id}`} key={value.id}>
                             <PositionCard
                                 Description={value.department}

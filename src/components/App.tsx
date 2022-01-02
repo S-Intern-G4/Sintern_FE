@@ -14,6 +14,7 @@ import OpenPositionFeed from './pages/Appliers/OpenPositionFeed';
 import Positions from './pages/Positions/Positions';
 import Results from './pages/Results/Results';
 import PositionForm from './pages/Positions/PositionForm';
+import TakeTest from './pages/TakeTest/TakeText';
 
 const App = () => (
   <UserContextProvider>
@@ -29,6 +30,7 @@ const App = () => (
         <AuthenticatedRoute path='/positions' component={Positions} exact />
         <AuthenticatedRoute path='/positions/add' component={PositionForm} exact />
         <AuthenticatedRoute path='/:openPositionId/results' component={Results} exact />
+        <AuthenticatedRoute path='/take-test/:openPositionId/:applicationId' component={TakeTest} exact />
         <Redirect to='/' />
       </Switch>
     </Router>

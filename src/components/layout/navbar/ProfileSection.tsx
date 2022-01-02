@@ -34,17 +34,11 @@ const ProfileSection = () => {
   const { setToken, setId, setType, id, type } = useContext(UserContext);
 
   useEffect(() => {
-    if (id) {
+    if (id && type) {
       if (type === 'student') {
         apiService.get<any>(ApiEndpoints.students(id))
           .then(({ data }) => {
             setName(`${data.firstName} ${data.lastName}`);
-          })
-          .catch(() => {
-            localStorage.removeItem('token');
-            localStorage.removeItem('id');
-            localStorage.removeItem('type');
-            setToken(null);
           });
       } else {
         apiService.get<any>(ApiEndpoints.companies(id))
@@ -53,7 +47,7 @@ const ProfileSection = () => {
           });
       }
     }
-  }, [id]);
+  }, [id, type]);
 
   const handleButtonLogout = () => {
     setToken('');
