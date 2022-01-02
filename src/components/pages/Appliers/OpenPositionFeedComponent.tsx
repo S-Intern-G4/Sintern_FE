@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Document } from 'react-pdf';
+import Document from 'react-pdf';
 
 const CardFeed = styled.div`
   width: 100%;
@@ -54,10 +54,18 @@ const DateOfSubmission = styled.div`
 
 const OpenPositionFeedComponent = (props) => {
   const { studentApplier } = props;
+  const [cv, setCv] = useState(null);
+
+  useEffect(() => {
+    // console.log("ceva"+studentApplier.cv);
+    setCv({ data: studentApplier.cv });
+  }, []);
+
 
   return (
     <CardFeed>
-      <Document file={studentApplier.cv} />
+      {/* <Document>
+      </Document> */}
       <TextCard>
         <StudentName>
           <strong>First name:</strong> {studentApplier.firstName}
@@ -73,11 +81,11 @@ const OpenPositionFeedComponent = (props) => {
           <strong>Faculty:</strong> {studentApplier.educationDetails.faculty}
         </Faculty>
         <Specialization>
-          <strong>Specialization:</strong>{' '}
+          <strong>Specialization:</strong>{" "}
           {studentApplier.educationDetails.specialization}
         </Specialization>
         <YearOfStudy>
-          <strong>Year Of Study:</strong>{' '}
+          <strong>Year Of Study:</strong>{" "}
           {studentApplier.educationDetails.yearOfStudy}
         </YearOfStudy>
         <PhoneNumber>
