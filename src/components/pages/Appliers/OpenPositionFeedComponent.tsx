@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Document } from 'react-pdf';
+import Document from 'react-pdf';
+import ApiService from '../../../services/apiService';
+import { ApiEndpoints } from '../../../configs/api/endpoints';
+import FileInput from '../../shared/FileInput';
 
 const CardFeed = styled.div`
   width: 100%;
@@ -19,6 +22,16 @@ const TextCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+`;
+
+const CvContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  position: relative;
 `;
 
 const StudentName = styled.div`
@@ -54,10 +67,34 @@ const DateOfSubmission = styled.div`
 
 const OpenPositionFeedComponent = (props) => {
   const { studentApplier } = props;
+  const { studentId } = props.studentApplier;
+
+  const [cv, setCV] = useState(null);
+
+  const getCV = () => {
+    ApiService.getFile(ApiEndpoints.cv(studentId))
+      .then((response) => {
+        setCV(URL.createObjectURL(response.data));
+      }).catch(() => {
+        setCV(null);
+      });
+  };
+
+  useEffect(() => {
+    getCV();
+  }, []);
+
 
   return (
     <CardFeed>
-      <Document file={studentApplier.cv} />
+      <CvContent>
+      <FileInput
+        name='file'
+        label='Choose File'
+        file={cv}
+        acceptPdf
+      />
+      </CvContent>
       <TextCard>
         <StudentName>
           <strong>First name:</strong> {studentApplier.firstName}
@@ -73,11 +110,11 @@ const OpenPositionFeedComponent = (props) => {
           <strong>Faculty:</strong> {studentApplier.educationDetails.faculty}
         </Faculty>
         <Specialization>
-          <strong>Specialization:</strong>{' '}
+          <strong>Specialization:</strong>{" "}
           {studentApplier.educationDetails.specialization}
         </Specialization>
         <YearOfStudy>
-          <strong>Year Of Study:</strong>{' '}
+          <strong>Year Of Study:</strong>{" "}
           {studentApplier.educationDetails.yearOfStudy}
         </YearOfStudy>
         <PhoneNumber>
