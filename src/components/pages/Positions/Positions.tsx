@@ -38,8 +38,8 @@ const Positions = () => {
                 
                 <CardsContainer>
                     {domains.map((value) => (
-                        <Link to={`appliers/${value.id}`} key={value.department}>
-                            <PositionCard key={value.department}
+                        <Link to={`appliers/${value.id}`} key={value.id}>
+                            <PositionCard
                                 Description={value.department}
                                 Id={value.id}
                                 OpenPositionId={value.id}

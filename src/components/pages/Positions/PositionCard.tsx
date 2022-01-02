@@ -40,13 +40,13 @@ const PositionCard = (props) => {
                 <p>{props.Description}</p>
             </CardDescription>
             <Buttons>
-                <Link to={`/${props.OpenPositionId}/results`} key={props.OpenPositionId}>
+                <Link to={`/${props.OpenPositionId}/results`}>
                     <CustomButton >
                         View results
                     </CustomButton>
                 </Link>
 
-                <Link to={`quizz/${props.OpenPositionId}`} key={props.OpenPositionId}>
+                <Link to={`quizz/${props.OpenPositionId}`}>
                     <CustomButton>Create Quizz</CustomButton>
                 </Link>
             </Buttons>

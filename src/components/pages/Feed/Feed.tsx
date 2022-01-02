@@ -8,12 +8,10 @@ import { OpenPosition } from '../../../interfaces/OpenPositions';
 import { ApiEndpoints } from '../../../configs/api/endpoints';
 import { useParams } from 'react-router-dom';
 
-
 const Feed = () => {
-
-    const [openPositions, setOpenPositions] = useState<OpenPosition[]>([]);
     const { domain } = useParams();
-    
+    const [openPositions, setOpenPositions] = useState<OpenPosition[]>([]);
+
     useEffect(() => {
         ApiService.get<any>(ApiEndpoints.openPositions + '/' + domain)
             .then((data) => {
@@ -27,7 +25,7 @@ const Feed = () => {
             <FeedContainer>
                 {openPositions.map((value, key) => (
                     <FeedComponent
-                        companyLogo = {value.companyLogo}
+                        companyLogo={value.companyLogo}
                         key={key}
                         name={value.name}
                         department={value.department}
@@ -35,7 +33,7 @@ const Feed = () => {
                         description={value.description}
                         numberOfMaxStudents={value.availablePositions}
                         id={value.id}
-                        >
+                    >
                     </FeedComponent>
                 ))}
             </FeedContainer>
