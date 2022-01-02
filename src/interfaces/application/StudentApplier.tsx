@@ -1,4 +1,5 @@
 export interface StudentApplier {
+  studentId: string
   firstName: string;
   lastName: string;
   educationDetails: {
@@ -10,7 +11,6 @@ export interface StudentApplier {
   phoneNumber: string;
   email: string;
   dateOfBirth: Date;
-  CV: string;
   description: string;
   dateOfSubmission: Date;
 }
