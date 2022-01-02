@@ -13,6 +13,7 @@ import Quizz from './pages/Quizz/Quizz';
 import OpenPositionFeed from './pages/Appliers/OpenPositionFeed';
 import Positions from './pages/Positions/Positions';
 import Results from './pages/Results/Results';
+import PositionForm from './pages/Positions/PositionForm';
 
 const App = () => (
   <UserContextProvider>
@@ -26,6 +27,7 @@ const App = () => (
         <AuthenticatedRoute path='/quizz/:openInternPositionId' component={Quizz} exact />
         <AuthenticatedRoute path='/appliers/:openPositionId' component={OpenPositionFeed} exact />
         <AuthenticatedRoute path='/positions' component={Positions} exact />
+        <AuthenticatedRoute path='/positions/add' component={PositionForm} exact />
         <AuthenticatedRoute path='/:openPositionId/results' component={Results} exact />
         <Redirect to='/' />
       </Switch>

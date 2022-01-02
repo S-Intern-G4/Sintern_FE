@@ -52,6 +52,10 @@ const Navbar = () => {
           type === 'company' &&
             <Link to={'/positions'}>Open positions</Link>
         }
+        {
+          type === 'company' &&
+            <Link to={'/positions/add'}>Add positions</Link>
+        }
       </Links>
 
       <ProfileSection />
