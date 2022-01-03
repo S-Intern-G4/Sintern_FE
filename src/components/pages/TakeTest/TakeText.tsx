@@ -70,7 +70,7 @@ const TakeTest = () => {
     const payload = {
       quizID: quizId,
       applicationID: applicationId,
-      answers: answers
+      testResponse: answers
     };
 
     ApiService.post<any, any>(ApiEndpoints.tests, payload)
